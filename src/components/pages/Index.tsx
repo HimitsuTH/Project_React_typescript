@@ -31,7 +31,7 @@ const Index = () => {
       <div>
         {data && (
           <div>
-            <h2>{data.name}</h2>
+            <h2 className="text-3xl font-bold">{data.name}</h2>
             <p>{data.description}</p>
             <p>{data.address.zip}</p>
             <p>{data.address.street}</p>
