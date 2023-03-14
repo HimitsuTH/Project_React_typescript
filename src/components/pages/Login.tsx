@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "@/components/styles/login.css";
+import axios from "axios";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineLock } from "react-icons/ai";
 
@@ -10,16 +11,70 @@ interface Login {
 
 export default function Login() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert(`${email}`);
+    try {
+      const response = await axios.post("http://localhost:3000/user/login", {
+        email,
+        password,
+      });
+      setErrorPassword("");
+      setErrorEmail("");
+      console.log(response.data.access_token);
+    } catch (err: any) {
+      const msg = err?.response.data;
+      switch (msg.status_code) {
+        case 401: {
+          setErrorPassword(msg.message);
+          setErrorEmail("");
+          break;
+        }
+        case 404: {
+          setErrorEmail(msg.message);
+          setErrorPassword("");
+          break;
+        }
+        case 422: {
+          msg.validation.map((validate: any) => {
+            if (msg.validation.length > 1) {
+              if (validate.param === "email") {
+                setErrorEmail(validate.msg);
+              }
+              if (validate.param === "password") {
+                setErrorPassword(validate.msg);
+              }
+            } else {
+              if (validate.param === "email") {
+                setErrorEmail(validate.msg);
+                setErrorPassword("");
+              } else if (validate.param === "password") {
+                setErrorPassword(validate.msg);
+                setErrorEmail("");
+              }
+            }
+          });
+
+          break;
+        }
+        default: {
+          setErrorPassword("");
+          setErrorEmail("");
+          break;
+        }
+      }
+      console.log(err);
+    }
   };
 
   return (
     <form
-      className="flex flex-col items-center justify-center mb-4 bg-slate-500 p-5 rounded-md"
-      onSubmit={submitForm} autoComplete="off"
+      className="flex flex-col items-center justify-center mb-4 bg-slate-700 p-6 rounded-md container w-96"
+      onSubmit={submitForm}
+      autoComplete="off"
     >
       <h1 className="text-3xl font-bold text-white mb-3">Login</h1>
       <div className="input_card">
@@ -32,15 +87,17 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
+      {errorEmail && <p className="text-red-500 m-1">{errorEmail}</p>}
       <div className="input_card">
         <AiOutlineLock className="icon text-5xl" />
         <input
           type="password"
           className="input"
           placeholder="password"
-          required
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
+      {errorPassword && <p className="text-red-500 m-1">{errorPassword}</p>}
       <button type="submit" className="m-5 bg-white">
         Sign In
       </button>
