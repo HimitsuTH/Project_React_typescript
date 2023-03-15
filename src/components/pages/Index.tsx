@@ -14,13 +14,12 @@ interface Shop {
 
 const Index = () => {
   const [data, setData] = useState<Shop>();
+  const [loading, setLoading] = useState<boolean>(false);
   const getData = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_URL}/shop`
-    ).then(res=> {
-      setData(res.data)
-      console.log(res)
-    });
+    setLoading(true);
+    const response = await axios.get(`${import.meta.env.VITE_URL}/shop`);
+    setData(response.data);
+    setLoading(false);
   };
   useEffect(() => {
     getData();
@@ -28,17 +27,21 @@ const Index = () => {
 
   return (
     <div>
-      <div>
-        {data && (
-          <div>
-            <h2 className="text-3xl font-bold">{data.name}</h2>
-            <p>{data.description}</p>
-            <p>{data.address.zip}</p>
-            <p>{data.address.street}</p>
-            <p>{data.address.province}</p>
-          </div>
-        )}
-      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          {data && (
+            <div>
+              <h2 className="text-3xl font-bold">{data.name}</h2>
+              <p>{data.description}</p>
+              <p>{data.address.zip}</p>
+              <p>{data.address.street}</p>
+              <p>{data.address.province}</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

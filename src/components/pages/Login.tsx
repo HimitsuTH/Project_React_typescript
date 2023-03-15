@@ -18,10 +18,13 @@ export default function Login() {
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/user/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_URL}/user/login`,
+        {
+          email,
+          password,
+        }
+      );
       setErrorPassword("");
       setErrorEmail("");
       console.log(response.data.access_token);
