@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "@/components/styles/login.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineLock } from "react-icons/ai";
 
@@ -14,6 +15,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
+  const navigate = useNavigate();
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,6 +30,7 @@ export default function Login() {
       setErrorPassword("");
       setErrorEmail("");
       console.log(response.data.access_token);
+      navigate("/");
     } catch (err: any) {
       const msg = err?.response.data;
       switch (msg.status_code) {
