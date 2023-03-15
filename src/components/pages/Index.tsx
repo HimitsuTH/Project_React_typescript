@@ -15,9 +15,8 @@ interface Shop {
 
 const Index = () => {
   const [data, setData] = useState<Shop>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const getData = async () => {
-    setLoading(true);
     const response = await axios.get(`${import.meta.env.VITE_URL}/shop`);
     setData(response.data);
     setLoading(false);
@@ -25,6 +24,7 @@ const Index = () => {
   useEffect(() => {
     getData();
   }, []);
+  useMemo(() => data, [data]);
 
   return (
     <div>
