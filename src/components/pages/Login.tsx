@@ -29,7 +29,10 @@ export default function Login() {
       );
       setErrorPassword("");
       setErrorEmail("");
-      console.log(response.data.access_token);
+      setEmail("");
+      setPassword("");
+      
+      // console.log(response.data.access_token);
       navigate("/");
     } catch (err: any) {
       const msg = err?.response.data;

@@ -28,7 +28,7 @@
 .navbar {
   position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   top:0;
   right: 0;
   width: 100%;
@@ -45,6 +45,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #535bf2;
 }
 
 
