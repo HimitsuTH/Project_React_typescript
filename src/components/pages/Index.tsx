@@ -32,7 +32,7 @@ const Index = () => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div className="flex flex-col justify-center place-items-center">
+        <div className="flex flex-col justify-center place-items-center select-none">
           {data && (
             <div className="bg-slate-700 p-6 rounded-md container w-96">
               <h2 className="text-3xl font-bold text-white underline mb-3">

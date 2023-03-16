@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import BrandItem from "../items/brandItem";
 
@@ -10,12 +10,15 @@ const Brand = (props: Props) => {
     const res = await axios.get(`${import.meta.env.VITE_URL}/shop/brand`);
     setData(res.data);
   };
-//   console.log(data);
-  
+  //   console.log(data);
 
   useEffect(() => {
     getBrand();
   }, []);
+
+  useMemo(() => {
+    data
+  }, [data]);
 
   return (
     <div className="right_Item">
