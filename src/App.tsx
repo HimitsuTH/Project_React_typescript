@@ -4,6 +4,7 @@ import Index from "@/components/pages/Index";
 import Navbar from "@/components/header/Navbar";
 import React, { useEffect, useMemo, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import Brand from "./components/pages/Brand";
 
 function App() {
   const [path, setPath] = useState<boolean>(true);
@@ -14,16 +15,17 @@ function App() {
     } else {
       setPath(false);
     }
-    return path
+    return path;
   };
 
   useEffect(() => {
-    usePathname();  
+    usePathname();
   }, [location.pathname]);
   return (
-    <div>
+    <div className="relative">
       <Navbar path={path} />
-      <div>
+      
+      <div className="">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/user/login" element={<Login />} />

@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
+import Brand from "./Brand";
 
 import axios from "axios";
 
@@ -27,11 +28,11 @@ const Index = () => {
   useMemo(() => data, [data]);
 
   return (
-    <div>
+    <div className="grid h-screen place-items-center">
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div>
+        <div className="flex flex-col justify-center place-items-center">
           {data && (
             <div className="bg-slate-700 p-6 rounded-md container w-96">
               <h2 className="text-3xl font-bold text-white underline mb-3">
@@ -45,6 +46,7 @@ const Index = () => {
               </p>
             </div>
           )}
+          <Brand />
         </div>
       )}
     </div>

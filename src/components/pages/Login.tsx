@@ -80,36 +80,38 @@ export default function Login() {
   };
 
   return (
-    <form
-      className="flex flex-col items-center justify-center mb-4 bg-slate-700 p-6 rounded-md container w-96"
-      onSubmit={submitForm}
-      autoComplete="off"
-    >
-      <h1 className="text-3xl font-bold text-white mb-3">Login</h1>
-      <div className="input_card">
-        <BiUserCircle className="icon text-5xl" />
-        <input
-          type="text"
-          className="input"
-          placeholder="email"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      {errorEmail && <p className="text-red-500 m-1">{errorEmail}</p>}
-      <div className="input_card">
-        <AiOutlineLock className="icon text-5xl" />
-        <input
-          type="password"
-          className="input"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      {errorPassword && <p className="text-red-500 m-1">{errorPassword}</p>}
-      <button type="submit" className="m-5 bg-white">
-        Sign In
-      </button>
-    </form>
+    <div className="grid h-screen place-items-center">
+      <form
+        className="flex flex-col items-center justify-center mb-4 bg-slate-700 p-6 rounded-md container w-96"
+        onSubmit={submitForm}
+        autoComplete="off"
+      >
+        <h1 className="text-3xl font-bold text-white mb-3">Login</h1>
+        <div className="input_card">
+          <BiUserCircle className="icon text-5xl" />
+          <input
+            type="text"
+            className="input"
+            placeholder="email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        {errorEmail && <p className="text-red-500 m-1">{errorEmail}</p>}
+        <div className="input_card">
+          <AiOutlineLock className="icon text-5xl" />
+          <input
+            type="password"
+            className="input"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {errorPassword && <p className="text-red-500 m-1">{errorPassword}</p>}
+        <button type="submit" className="m-5 bg-white">
+          Sign In
+        </button>
+      </form>
+    </div>
   );
 }
