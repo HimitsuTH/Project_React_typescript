@@ -25,14 +25,23 @@ export default function Login() {
         {
           email,
           password,
+        },
+        {
+          // withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
       setErrorPassword("");
       setErrorEmail("");
       setEmail("");
       setPassword("");
+      await localStorage.setItem("access_token", response.data.access_token);
+      console.log(response);
       
-      // console.log(response.data.access_token);
+      
+    
       navigate("/");
     } catch (err: any) {
       const msg = err?.response.data;
@@ -85,6 +94,7 @@ export default function Login() {
         className="flex flex-col items-center justify-center mb-4 bg-slate-700 p-6 rounded-md container w-96"
         onSubmit={submitForm}
         autoComplete="off"
+        method="POST"
       >
         <h1 className="text-3xl font-bold text-white mb-3">Login</h1>
         <div className="input_card">
