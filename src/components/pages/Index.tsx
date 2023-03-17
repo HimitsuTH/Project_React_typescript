@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import Brand from "./Brand";
 
 import axios from "axios";
+import { Skeleton } from "@mui/material";
 
 interface Shop {
   id: number;
@@ -30,7 +31,7 @@ const Index = () => {
   return (
     <div className="grid h-screen place-items-center">
       {loading ? (
-        <div>Loading...</div>
+        <Skeleton variant="rectangular"  className="w-96" height={300}/>
       ) : (
         <div className="flex flex-col justify-center place-items-center select-none">
           {data && (
