@@ -10,6 +10,11 @@ interface Login {
   password?: string;
 }
 
+export interface Token {
+  access_token: string;
+  expires_in: string;
+}
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,11 +42,15 @@ export default function Login() {
       setErrorEmail("");
       setEmail("");
       setPassword("");
-      await localStorage.setItem("access_token", response.data.access_token);
+
+      const token:Token = {
+        access_token: response.data.access_token,
+        expires_in: response.data.expires_in,
+      };
+      localStorage.setItem("token", JSON.stringify(token));
+
       console.log(response);
-      
-      
-    
+
       navigate("/");
     } catch (err: any) {
       const msg = err?.response.data;

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import { Token } from "../pages/Login";
 
 type Props = {
   path: boolean;
@@ -16,11 +17,13 @@ interface User {
 const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<User>();
 
-  const token = localStorage.getItem("access_token");
+  const tokenString = localStorage.getItem("token");
+  const token: Token | null = tokenString ? JSON.parse(tokenString) : null;
+
   const getUser = async () => {
     const config = {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token?.access_token}`,
         "Content-Type": "application/json",
       },
     };
@@ -31,6 +34,7 @@ const navbar = ({ path }: Props) => {
       );
 
       setUser(res.data.user);
+      // console.log(token.access_token);
     }
   };
 
@@ -39,7 +43,7 @@ const navbar = ({ path }: Props) => {
   }, [token]);
 
   const handleToken = async () => {
-    await localStorage.removeItem("access_token");
+    await localStorage.removeItem("token");
   };
 
   return (
