@@ -24,7 +24,7 @@ const Brand_id = (props: Props) => {
     const res = await axios.get(`${import.meta.env.VITE_URL}/shop/brand/${id}`);
     setData(res.data);
     setLoading(false);
-    console.log(res.data);
+    // console.log(res.data);
   };
   useEffect(() => {
     getBrand();
