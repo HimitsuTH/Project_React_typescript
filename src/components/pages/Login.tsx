@@ -11,8 +11,8 @@ interface Login {
 }
 
 export interface Token {
-  access_token: string;
-  expires_in: string;
+  access_token?: string;
+  expires_in?: string | number;
 }
 
 export default function Login() {
@@ -43,14 +43,14 @@ export default function Login() {
       setEmail("");
       setPassword("");
 
-      const token:Token = {
+      const token: Token = {
         access_token: response.data.access_token,
         expires_in: response.data.expires_in,
       };
       localStorage.setItem("token", JSON.stringify(token));
 
       console.log(response);
-
+      
       navigate("/");
     } catch (err: any) {
       const msg = err?.response.data;

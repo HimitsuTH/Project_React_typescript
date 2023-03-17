@@ -1,4 +1,5 @@
 import axios from "axios";
+import { time } from "console";
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
@@ -16,11 +17,22 @@ interface User {
 
 const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<User>();
-
   const tokenString = localStorage.getItem("token");
-  const token: Token | null = tokenString ? JSON.parse(tokenString) : null;
+  let token: Token | null = tokenString ? JSON.parse(tokenString) : null;
+  const now = new Date().getTime();
+  const expires_in: number = parseInt(String(token?.expires_in)) || 0;
+  const expiryTime = new Date(Date.now() + expires_in * 1000).getTime();
+
+  if (expiryTime < now) {
+    localStorage.removeItem("token");
+  }
+   
+ 
+
+  // console.log(expires_in)
 
   const getUser = async () => {
+    
     const config = {
       headers: {
         Authorization: `Bearer ${token?.access_token}`,
@@ -34,16 +46,21 @@ const navbar = ({ path }: Props) => {
       );
 
       setUser(res.data.user);
+      
       // console.log(token.access_token);
     }
+
+    // console.log(now)
+    // console.log("H", token?.expires_in)
+ 
   };
 
   useEffect(() => {
     getUser();
-  }, [token]);
+  }, []);
 
   const handleToken = async () => {
-    await localStorage.removeItem("token");
+    localStorage.removeItem("token");
   };
 
   return (
