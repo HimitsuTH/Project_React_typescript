@@ -47,6 +47,7 @@ const navbar = ({ path }: Props) => {
           .then((data) => {
             setUser(data.data.user);
             setLoading(false);
+            setToggle(true);
           });
       }
     } catch (err) {
@@ -74,10 +75,19 @@ const navbar = ({ path }: Props) => {
           <Skeleton variant="rectangular" className="w-60" height={50} />
         ) : (
           <div className="flex place-items-center">
-            <EditIcon/>
-            <p className="text-white mr-5 select-none">{user?.email}</p>
+            {/* <p className="text-white select-none">{user?.email}</p> */}
+            <p className="text-white select-none">{user?.name}</p>
             <Link
-              to={"/user/login"}
+              to={toggle ? "/user" : "/"}
+              onClick={() => setToggle(!toggle)}
+            >
+              <EditIcon
+                className="text-white mx-3 cursor-pointer"
+                sx={{ "&:hover": { color: "#b9bdff" } }}
+              />
+            </Link>
+            <Link
+              to={"/login"}
               className="bg-slate-100 p-2 rounded-md"
               onClick={handleToken}
             >
@@ -86,7 +96,7 @@ const navbar = ({ path }: Props) => {
           </div>
         )
       ) : (
-        <Link to={"/user/login"} className="bg-slate-100 p-2 rounded-md">
+        <Link to={"/login"} className="bg-slate-100 p-2 rounded-md">
           sign in
         </Link>
       )}

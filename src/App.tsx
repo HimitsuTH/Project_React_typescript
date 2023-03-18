@@ -4,6 +4,7 @@ import Login from "@/components/pages/Login";
 import Index from "@/components/pages/Index";
 import Navbar from "@/components/header/Navbar";
 import Brand_id from "@/components/pages/Brand.id";
+import EditUser from "./components/pages/user/EditUser";
 
 import React, { useEffect, useMemo, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -12,7 +13,7 @@ function App() {
   const [path, setPath] = useState<boolean>(true);
   const location = useLocation();
   const usePathname = () => {
-    if (location.pathname === "/user/login") {
+    if (location.pathname === "/login") {
       setPath(true);
     } else {
       setPath(false);
@@ -30,8 +31,9 @@ function App() {
       <div className="">
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/user/login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/shop/brand/:id" element={<Brand_id />} />
+          <Route path="/user" element={<EditUser />} />
         </Routes>
       </div>
     </div>

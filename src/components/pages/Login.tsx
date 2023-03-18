@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineLock } from "react-icons/ai";
 
-interface Login {
+export interface Login {
   email?: string;
   password?: string;
 }
