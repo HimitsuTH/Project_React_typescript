@@ -42,7 +42,10 @@ const Brand_id = (props: Props) => {
             </p>
             <div className="flex mt-5 flex-col">
               {data.headphones.map((headphone: any) => (
-                <li className="m-2 text-center  rounded-lg text-white" key={headphone.id}>
+                <li
+                  className="m-2 text-center  rounded-lg text-white cursor-pointer"
+                  key={headphone.id}
+                >
                   {headphone.name}
                 </li>
               ))}

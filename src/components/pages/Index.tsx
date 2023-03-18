@@ -33,7 +33,7 @@ const Index = () => {
       {loading ? (
         <Skeleton variant="rectangular"  className="w-96" height={300}/>
       ) : (
-        <div className="flex flex-col justify-center place-items-center select-none">
+        <div className="flex flex-col justify-center place-items-center select-none mt-5">
           {data && (
             <div className="bg-slate-700 p-6 rounded-md container w-96">
               <h2 className="text-3xl font-bold text-white underline mb-3">
