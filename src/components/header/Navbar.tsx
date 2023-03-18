@@ -21,18 +21,16 @@ const navbar = ({ path }: Props) => {
   let token: Token | null = tokenString ? JSON.parse(tokenString) : null;
   const now = new Date().getTime();
   const expires_in: number = parseInt(String(token?.expires_in)) || 0;
-  const expiryTime = new Date(Date.now() + expires_in * 1000).getTime();
+  const expiryTime = expires_in * 1000;
+  // console.log("expiryTime", expiryTime);
+  // console.log("now", now)
 
   if (expiryTime < now) {
     localStorage.removeItem("token");
+    // console.log("test");
   }
-   
- 
-
-  // console.log(expires_in)
 
   const getUser = async () => {
-    
     const config = {
       headers: {
         Authorization: `Bearer ${token?.access_token}`,
@@ -46,13 +44,7 @@ const navbar = ({ path }: Props) => {
       );
 
       setUser(res.data.user);
-      
-      // console.log(token.access_token);
     }
-
-    // console.log(now)
-    // console.log("H", token?.expires_in)
- 
   };
 
   useEffect(() => {
