@@ -1,9 +1,9 @@
 import axios from "axios";
-import { time } from "console";
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { Token } from "../pages/Login";
+import { Skeleton } from "@mui/material";
 
 type Props = {
   path: boolean;
@@ -17,6 +17,7 @@ interface User {
 
 const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<User>();
+  const [loading, setLoading]= useState<boolean>(true);
   const tokenString = localStorage.getItem("token");
   let token: Token | null = tokenString ? JSON.parse(tokenString) : null;
   const now = new Date().getTime();
@@ -27,7 +28,6 @@ const navbar = ({ path }: Props) => {
 
   if (expiryTime < now) {
     localStorage.removeItem("token");
-    // console.log("test");
   }
 
   const getUser = async () => {
@@ -38,12 +38,12 @@ const navbar = ({ path }: Props) => {
       },
     };
     if (token) {
-      const res = await axios.get(
-        `${import.meta.env.VITE_URL}/user/me`,
-        config
-      );
-
-      setUser(res.data.user);
+      const res = await axios
+        .get(`${import.meta.env.VITE_URL}/user/me`, config)
+        .then((data) => {
+          setUser(data.data.user);
+          setLoading(false)
+        });
     }
   };
 
@@ -53,25 +53,30 @@ const navbar = ({ path }: Props) => {
 
   const handleToken = async () => {
     localStorage.removeItem("token");
+    setUser(undefined);
   };
 
   return (
-    <div className="navbar p-2">
+    <div className="navbar p-5">
       {path ? (
         <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
           back
         </Link>
       ) : token ? (
-        <div className="m-2 flex place-items-center">
-          <p className="text-white mr-5 select-none">{user?.email}</p>
-          <Link
-            to={"/user/login"}
-            className="bg-slate-100 p-2 rounded-md"
-            onClick={handleToken}
-          >
-            Logout
-          </Link>
-        </div>
+        loading ? (
+          <Skeleton variant="rectangular" className="w-60" height={50}/>
+        ) : (
+          <div className="flex place-items-center">
+            <p className="text-white mr-5 select-none">{user?.email}</p>
+            <Link
+              to={"/user/login"}
+              className="bg-slate-100 p-2 rounded-md"
+              onClick={handleToken}
+            >
+              Logout
+            </Link>
+          </div>
+        )
       ) : (
         <Link to={"/user/login"} className="bg-slate-100 p-2 rounded-md">
           sign in

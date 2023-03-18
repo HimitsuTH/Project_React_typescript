@@ -49,9 +49,8 @@ export default function Login() {
       };
       localStorage.setItem("token", JSON.stringify(token));
 
-      console.log(response);
-      
-      navigate("/");
+      navigate("/", { replace: true });
+      window.location.reload();
     } catch (err: any) {
       const msg = err?.response.data;
       switch (msg.status_code) {
