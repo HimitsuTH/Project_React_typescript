@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { Token } from "../pages/Login";
 import { Skeleton } from "@mui/material";
 
+import EditIcon from "@mui/icons-material/Edit";
+
 type Props = {
   path: boolean;
 };
@@ -17,7 +19,8 @@ interface User {
 
 const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<User>();
-  const [loading, setLoading]= useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [toggle, setToggle] = useState<boolean>(false);
   const tokenString = localStorage.getItem("token");
   let token: Token | null = tokenString ? JSON.parse(tokenString) : null;
   const now = new Date().getTime();
@@ -31,19 +34,23 @@ const navbar = ({ path }: Props) => {
   }
 
   const getUser = async () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token?.access_token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    if (token) {
-      const res = await axios
-        .get(`${import.meta.env.VITE_URL}/user/me`, config)
-        .then((data) => {
-          setUser(data.data.user);
-          setLoading(false)
-        });
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token?.access_token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      if (token) {
+        const res = await axios
+          .get(`${import.meta.env.VITE_URL}/user/me`, config)
+          .then((data) => {
+            setUser(data.data.user);
+            setLoading(false);
+          });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -64,9 +71,10 @@ const navbar = ({ path }: Props) => {
         </Link>
       ) : token ? (
         loading ? (
-          <Skeleton variant="rectangular" className="w-60" height={50}/>
+          <Skeleton variant="rectangular" className="w-60" height={50} />
         ) : (
           <div className="flex place-items-center">
+            <EditIcon/>
             <p className="text-white mr-5 select-none">{user?.email}</p>
             <Link
               to={"/user/login"}
