@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import { Token } from "../pages/Login";
+import { Token } from "@/types/Auth";
 import { Skeleton } from "@mui/material";
+import IUser from "@/types/Auth";
 
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -11,14 +12,10 @@ type Props = {
   path: boolean;
 };
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+
 
 const navbar = ({ path }: Props) => {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(true);
   const [toggle, setToggle] = useState<boolean>(false);
   const tokenString = localStorage.getItem("user");

@@ -18,7 +18,7 @@ export const login = async (email: string, password: string) => {
       if (response.data.access_token) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
-      console.log(response.data + "test");
+    //   console.log(JSON.stringify(response.data) + "test");
       return response.data;
     });
 };

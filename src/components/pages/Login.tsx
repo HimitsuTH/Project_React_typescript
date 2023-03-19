@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "@/components/styles/login.css";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineLock } from "react-icons/ai";
@@ -9,11 +9,6 @@ import { login } from "@/services/auth.service";
 export interface Login {
   email?: string;
   password?: string;
-}
-
-export interface Token {
-  access_token?: string;
-  expires_in?: string | number;
 }
 
 export default function Login() {

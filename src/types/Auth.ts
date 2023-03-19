@@ -4,3 +4,8 @@ export default interface IUser {
   email: string;
   roles?: string;
 }
+
+export interface Token {
+  access_token?: string;
+  expires_in?: string | number;
+}
