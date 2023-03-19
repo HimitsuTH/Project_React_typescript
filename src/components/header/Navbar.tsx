@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 import { Token } from "@/types/Auth";
 import { Skeleton } from "@mui/material";
 import IUser from "@/types/Auth";
+import { getCurrentUser } from "@/services/user.service";
 
 import EditIcon from "@mui/icons-material/Edit";
 
 type Props = {
   path: boolean;
 };
-
-
 
 const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<IUser>();
@@ -23,8 +22,6 @@ const navbar = ({ path }: Props) => {
   const now = new Date().getTime();
   const expires_in: number = parseInt(String(token?.expires_in)) || 0;
   const expiryTime = expires_in * 1000;
-  // console.log("expiryTime", expiryTime);
-  // console.log("now", now)
 
   if (expiryTime < now) {
     localStorage.removeItem("user");
@@ -32,21 +29,10 @@ const navbar = ({ path }: Props) => {
 
   const getUser = async () => {
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token?.access_token}`,
-          "Content-Type": "application/json",
-        },
-      };
-      if (token) {
-        const res = await axios
-          .get(`${import.meta.env.VITE_URL}/user/me`, config)
-          .then((data) => {
-            setUser(data.data.user);
-            setLoading(false);
-            setToggle(true);
-          });
-      }
+      getCurrentUser().then((res) => {
+        setUser(res.user);
+        setLoading(false);
+      });
     } catch (err) {
       console.log(err);
     }
