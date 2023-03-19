@@ -1,16 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { brand } from "@/types/types";
+interface props {}
 
-type Props = {
-  data: {
-    id: string
-    name: string,
-    description: string
-  };
-};
-
-const brandItem = ({ data }: Props) => {
-   
+const brandItem = ({ data }: any | brand) => {
   return (
     <Link
       to={`/shop/brand/${data.id}`}
