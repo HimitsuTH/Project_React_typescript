@@ -21,7 +21,7 @@ const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState<boolean>(true);
   const [toggle, setToggle] = useState<boolean>(false);
-  const tokenString = localStorage.getItem("token");
+  const tokenString = localStorage.getItem("user");
   let token: Token | null = tokenString ? JSON.parse(tokenString) : null;
   const now = new Date().getTime();
   const expires_in: number = parseInt(String(token?.expires_in)) || 0;
@@ -30,7 +30,7 @@ const navbar = ({ path }: Props) => {
   // console.log("now", now)
 
   if (expiryTime < now) {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   }
 
   const getUser = async () => {
@@ -60,7 +60,7 @@ const navbar = ({ path }: Props) => {
   }, []);
 
   const handleToken = async () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(undefined);
   };
 

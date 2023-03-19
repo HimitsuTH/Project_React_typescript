@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineLock } from "react-icons/ai";
+import { login } from "@/services/auth.service";
 
 export interface Login {
   email?: string;
@@ -24,76 +25,59 @@ export default function Login() {
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_URL}/user/login`,
-        {
-          email,
-          password,
-        },
-        {
-          // withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setErrorPassword("");
-      setErrorEmail("");
-      setEmail("");
-      setPassword("");
 
-      const token: Token = {
-        access_token: response.data.access_token,
-        expires_in: response.data.expires_in,
-      };
-      localStorage.setItem("token", JSON.stringify(token));
+    login(email, password).then(
+      () => {
+        setErrorPassword("");
+        setErrorEmail("");
+        setEmail("");
+        setPassword("");
+        navigate("/", { replace: true });
+        window.location.reload();
+      },
+      (err) => {
+        const msg = err?.response.data;
+        switch (msg.status_code) {
+          case 401: {
+            setErrorPassword(msg.message);
+            setErrorEmail("");
+            break;
+          }
+          case 404: {
+            setErrorEmail(msg.message);
+            setErrorPassword("");
+            break;
+          }
+          case 422: {
+            msg.validation.map((validate: any) => {
+              if (msg.validation.length > 1) {
+                if (validate.param === "email") {
+                  setErrorEmail(validate.msg);
+                }
+                if (validate.param === "password") {
+                  setErrorPassword(validate.msg);
+                }
+              } else {
+                if (validate.param === "email") {
+                  setErrorEmail(validate.msg);
+                  setErrorPassword("");
+                } else if (validate.param === "password") {
+                  setErrorPassword(validate.msg);
+                  setErrorEmail("");
+                }
+              }
+            });
 
-      navigate("/", { replace: true });
-      window.location.reload();
-    } catch (err: any) {
-      const msg = err?.response.data;
-      switch (msg.status_code) {
-        case 401: {
-          setErrorPassword(msg.message);
-          setErrorEmail("");
-          break;
-        }
-        case 404: {
-          setErrorEmail(msg.message);
-          setErrorPassword("");
-          break;
-        }
-        case 422: {
-          msg.validation.map((validate: any) => {
-            if (msg.validation.length > 1) {
-              if (validate.param === "email") {
-                setErrorEmail(validate.msg);
-              }
-              if (validate.param === "password") {
-                setErrorPassword(validate.msg);
-              }
-            } else {
-              if (validate.param === "email") {
-                setErrorEmail(validate.msg);
-                setErrorPassword("");
-              } else if (validate.param === "password") {
-                setErrorPassword(validate.msg);
-                setErrorEmail("");
-              }
-            }
-          });
-
-          break;
-        }
-        default: {
-          setErrorPassword("");
-          setErrorEmail("");
-          break;
+            break;
+          }
+          default: {
+            setErrorPassword("");
+            setErrorEmail("");
+            break;
+          }
         }
       }
-      console.log(err);
-    }
+    );
   };
 
   return (
