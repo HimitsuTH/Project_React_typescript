@@ -47,7 +47,7 @@ const Index = () => {
               </p>
             </div>
           )}
-          <Brand />
+          {/* <Brand /> */}
         </div>
       )}
     </div>

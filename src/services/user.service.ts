@@ -1,20 +1,13 @@
 import axios from "axios";
-import { Token } from "@/types/Auth";
-
-const userString = localStorage.getItem("user");
-
-const user: Token | null = userString ? JSON.parse(userString) : null;
- const config = {
-   headers: {
-     Authorization: `Bearer ${user?.access_token}`,
-     "Content-Type": "application/json",
-   },
- };
-
+import authHeader from "./header.service";
 
 export const getCurrentUser = async () => {
-  return await axios.get(`${import.meta.env.VITE_URL}/user/me`,config).then((res)=> {return res.data})
-}
+  return await axios
+    .get(`${import.meta.env.VITE_URL}/user/me`, { headers: authHeader() })
+    .then((res) => {
+      return res.data;
+    });
+};
 
 export const updateUser = async (username: string, password: string) => {
   return await axios
@@ -24,7 +17,7 @@ export const updateUser = async (username: string, password: string) => {
         name: username,
         password: password,
       },
-      config
+      { headers: authHeader() }
     )
     .then((response) => {
       console.log(JSON.stringify(response.data) + "HELLO");

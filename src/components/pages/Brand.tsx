@@ -26,48 +26,52 @@ const Brand = (props: Props) => {
   }, [data]);
 
   return (
-    <div className="right_Item">
+    <div className="grid h-screen place-items-center">
       {loading ? (
-        <div className="grid gap-3 grid-cols-2">
+        <div className="grid gap-2 grid-cols-2">
           <Skeleton
             variant="rectangular"
             height={50}
-            width={150}
+            width={120}
             className="mb-5"
           />
           <Skeleton
             variant="rectangular"
             height={50}
-            width={150}
+            width={120}
             className="mb-5"
           />
           <Skeleton
             variant="rectangular"
             height={50}
-            width={150}
+            width={120}
             className="mb-5"
           />
           <Skeleton
             variant="rectangular"
             height={50}
-            width={150}
+            width={120}
             className="mb-5"
           />
           <Skeleton
             variant="rectangular"
             height={50}
-            width={150}
+            width={120}
             className="mb-5"
           />
           <Skeleton
             variant="rectangular"
             height={50}
-            width={150}
+            width={120}
             className="mb-5"
           />
         </div>
       ) : (
-        data.map((data: brand) => <BrandItem key={data.id} data={data} />)
+        <div className="grid grid-cols-2">
+          {data.map((data: brand) => (
+            <BrandItem key={data.id} data={data} />
+          ))}
+        </div>
       )}
     </div>
   );

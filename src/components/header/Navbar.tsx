@@ -49,6 +49,14 @@ const navbar = ({ path }: Props) => {
 
   return (
     <div className="navbar p-5">
+      <ul className="gap-5 flex">
+        <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
+          Home
+        </Link>
+        <Link to={"/shop/brand"} className="bg-slate-100 p-2 rounded-md">
+          Brand
+        </Link>
+      </ul>
       {path ? (
         <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
           back
