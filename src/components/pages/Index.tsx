@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import Brand from "./Brand";
+
 
 import axios from "axios";
 import { Skeleton } from "@mui/material";
@@ -27,6 +27,8 @@ const Index = () => {
     getData();
   }, []);
   useMemo(() => data, [data]);
+
+ 
 
   return (
     <div className="grid h-screen place-items-center">

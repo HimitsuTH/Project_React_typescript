@@ -1,8 +1,8 @@
 export default interface IUser {
   id?: any | null;
-  name: string;
-  email: string;
-  roles?: string;
+  name?: string;
+  email?: string;
+  role?: string;
 }
 
 export interface Token {

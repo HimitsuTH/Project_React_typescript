@@ -33,9 +33,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/shop/brand/:id" element={<Brand_id />} />
+          <Route path="/brand/:id" element={<Brand_id />} />
           <Route path="/user" element={<EditUser />} />
-          <Route path="/shop/brand" element={<Brand />} />
+          <Route path="/brand" element={<Brand />} />
         </Routes>
       </div>
 

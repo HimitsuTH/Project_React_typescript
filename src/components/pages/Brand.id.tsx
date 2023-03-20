@@ -51,7 +51,7 @@ const Brand_id = (props: Props) => {
               ))}
             </div>
           </div>
-          <Link to={"/"} className="bg-slate-100 p-2 rounded-md mt-5">
+          <Link to={"/brand"} className="bg-slate-100 p-2 rounded-md mt-5">
             Back
           </Link>
         </div>

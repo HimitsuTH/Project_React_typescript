@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import { Token } from "@/types/Auth";
 import { Skeleton } from "@mui/material";
 import IUser from "@/types/Auth";
 import { getCurrentUser } from "@/services/user.service";
+
 
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -17,22 +18,29 @@ const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(true);
   const [toggle, setToggle] = useState<boolean>(false);
-  const tokenString = localStorage.getItem("user");
+
+  const navigate = useNavigate();
+
+  const tokenString = localStorage.getItem("token");
   let token: Token | null = tokenString ? JSON.parse(tokenString) : null;
+
+  // set expires_in token
   const now = new Date().getTime();
   const expires_in: number = parseInt(String(token?.expires_in)) || 0;
   const expiryTime = expires_in * 1000;
 
   if (expiryTime < now) {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
 
   const getUser = async () => {
     try {
-      getCurrentUser().then((res) => {
-        setUser(res.user);
-        setLoading(false);
-      });
+     if(token){
+       getCurrentUser().then((res) => {
+         setUser(res.user);
+         setLoading(false);
+       });
+     }
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +51,8 @@ const navbar = ({ path }: Props) => {
   }, []);
 
   const handleToken = async () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user")
     setUser(undefined);
   };
 
@@ -53,7 +62,14 @@ const navbar = ({ path }: Props) => {
         <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
           Home
         </Link>
-        <Link to={"/shop/brand"} className="bg-slate-100 p-2 rounded-md">
+        <Link
+          to={"/brand"}
+          className="bg-slate-100 p-2 rounded-md"
+          onClick={() => {
+            navigate("/brand", { replace: true });
+            window.location.reload();
+          }}
+        >
           Brand
         </Link>
       </ul>
