@@ -64,23 +64,30 @@ const navbar = ({ path }: Props) => {
 
   return (
     <div className="navbar p-5">
-      <ul className="gap-5 flex">
-        <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
-          Home
-        </Link>
-        <Link
-          to={"/brand"}
-          className="bg-slate-100 p-2 rounded-md"
-          onClick={() => {
-            if (user) {
-              navigate("/brand", { replace: true });
-              window.location.reload();
-            }
-          }}
-        >
-          Brand
-        </Link>
-      </ul>
+      {loading ? (
+        <div className="gap-5 flex">
+          <Skeleton variant="rectangular" width={50} height={40} />
+          <Skeleton variant="rectangular" width={50} height={40} />
+        </div>
+      ) : (
+        <ul className="gap-5 flex">
+          <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
+            Home
+          </Link>
+          <Link
+            to={"/brand"}
+            className="bg-slate-100 p-2 rounded-md"
+            onClick={() => {
+              if (user) {
+                navigate("/brand", { replace: true });
+                window.location.reload();
+              }
+            }}
+          >
+            Brand
+          </Link>
+        </ul>
+      )}
       {path ? (
         <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
           back
