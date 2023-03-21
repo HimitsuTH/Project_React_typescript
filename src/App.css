@@ -29,3 +29,10 @@
   height: 80px;
   /* background-color: rgba(0,0,0,0.2); */
 }
+
+.custom-ui {
+  background-color: rgba(0,0,0,0.6) ;
+  padding: 1.5rem;
+  border-radius: 2rem;
+}
+

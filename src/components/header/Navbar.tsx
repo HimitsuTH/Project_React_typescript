@@ -1,13 +1,19 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Link , useNavigate } from "react-router-dom";
-import { Token } from "@/types/Auth";
+//@Mui 
 import { Skeleton } from "@mui/material";
+
+
+//Types
+import { Token } from "@/types/Auth";
 import IUser from "@/types/Auth";
+
+//@services
 import { getCurrentUser } from "@/services/user.service";
 
-
+//@User edit page
 import EditIcon from "@mui/icons-material/Edit";
 
 type Props = {
@@ -35,12 +41,12 @@ const navbar = ({ path }: Props) => {
 
   const getUser = async () => {
     try {
-     if(token){
-       getCurrentUser().then((res) => {
-         setUser(res.user);
-         setLoading(false);
-       });
-     }
+      if (token) {
+        getCurrentUser().then((res) => {
+          setUser(res.user);
+          setLoading(false);
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -52,7 +58,7 @@ const navbar = ({ path }: Props) => {
 
   const handleToken = async () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user")
+    localStorage.removeItem("user");
     setUser(undefined);
   };
 
@@ -66,8 +72,10 @@ const navbar = ({ path }: Props) => {
           to={"/brand"}
           className="bg-slate-100 p-2 rounded-md"
           onClick={() => {
-            navigate("/brand", { replace: true });
-            window.location.reload();
+            if (user) {
+              navigate("/brand", { replace: true });
+              window.location.reload();
+            }
           }}
         >
           Brand
