@@ -28,18 +28,19 @@ function EditUser() {
                       (res) => {
                         const data = JSON.parse(res);
                         console.log(res);
-                        return alert(data.message);
+                        alert(data.message);
+                        navigate("/", { replace: true });
+                        window.location.reload();
                       },
                       (err) => {
                         console.log(err);
-                        return alert(err?.response.data.message);
+                        alert(err?.response.data.message);
+                        onClose();
                       }
                     )
                     .then(() => {
                       setUserName("");
                       setPassword("");
-                      navigate("/", { replace: true });
-                      window.location.reload();
                     });
                 }}
               >

@@ -38,7 +38,13 @@ const Brand_id = (props: Props) => {
         <div>loading...</div>
       ) : (
         <div className="grid h-screen place-items-center">
-          <AddIcon/>
+          <AddIcon
+            className="text-white mx-3 cursor-pointer absolute top-50 right-24 rounded-full bg-slate-800"
+            sx={{
+              fontSize: 36,
+              "&:hover": { color: "#b9bdff", background: "#0b006d75" },
+            }}
+          />
           <div>
             <p className="uppercase bg-slate-50 p-3 rounded-lg select-none text-center font-bold">
               {data.brand.name}
