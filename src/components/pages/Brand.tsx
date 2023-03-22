@@ -22,7 +22,7 @@ const Brand = (props: Props) => {
   }, []);
 
   useMemo(() => {
-    data;
+     data;
   }, [data]);
 
   return (

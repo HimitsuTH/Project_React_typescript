@@ -7,7 +7,9 @@ import Brand_id from "@/components/pages/Brand.id";
 import EditUser from "./components/pages/user/EditUser";
 import Brand from "./components/pages/Brand";
 
-import React, { useEffect, useMemo, useState } from "react";
+import { getCurrentUser } from "./services/user.service";
+
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 function App() {
@@ -25,6 +27,10 @@ function App() {
   useEffect(() => {
     usePathname();
   }, [location.pathname]);
+
+  useCallback(()=> {
+    getCurrentUser();
+  },[])
   return (
     <div className="relative">
       <Navbar path={path} />
@@ -38,8 +44,6 @@ function App() {
           <Route path="/brand" element={<Brand />} />
         </Routes>
       </div>
-
-    
     </div>
   );
 }

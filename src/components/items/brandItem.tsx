@@ -8,16 +8,17 @@ import { brand } from "@/types/types";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { delete_Brand } from "@/services/brand.service";
-import { currentUser } from "@/services/user.service";
 
 const brandItem = ({ data }: any | brand) => {
+  const user = localStorage.getItem("user");
+  const currentUser: IUser = user ? JSON.parse(user) : {};
   const handleDelete = (id: string) => {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
           <div className="custom-ui">
             <h1 className="text-white">Are you sure?</h1>
-            <p className="text-white">You want to delete this file?</p>
+            <p className="text-white">You want to delete this brand?</p>
             <div className="grid grid-cols-2 gap-2 mt-2">
               <button onClick={onClose}>No</button>
               <button

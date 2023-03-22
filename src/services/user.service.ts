@@ -1,12 +1,6 @@
 import axios from "axios";
 import authHeader from "./header.service";
 import { tokenStr } from "./header.service";
-import IUser from '../types/Auth';
-
-const user = localStorage.getItem("user");
-
-export const currentUser: IUser = user ? JSON.parse(user) : {};
-
 
 
 export const getCurrentUser = async () => {
