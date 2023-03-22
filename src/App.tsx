@@ -3,9 +3,10 @@ import "./App.css";
 import Login from "@/components/pages/Login";
 import Index from "@/components/pages/Index";
 import Navbar from "@/components/header/Navbar";
-import Brand_id from "@/components/pages/Brand.id";
+import Brand_id from "@/components/pages/brand/Brand.id";
 import EditUser from "./components/pages/user/EditUser";
-import Brand from "./components/pages/Brand";
+import Brand from "./components/pages/brand/Brand";
+import AddBrand from "./components/pages/brand/AddBrand";
 
 import { getCurrentUser } from "./services/user.service";
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/brand/:id" element={<Brand_id />} />
           <Route path="/user" element={<EditUser />} />
           <Route path="/brand" element={<Brand />} />
+          <Route path="/brand/add" element={<AddBrand />} />
         </Routes>
       </div>
     </div>

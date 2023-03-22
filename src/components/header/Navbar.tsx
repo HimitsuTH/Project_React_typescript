@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LinkPage from "./LinkPage";
@@ -60,19 +59,13 @@ const navbar = ({ path }: Props) => {
   };
 
   return (
-    <div className="navbar p-2">
-      {/* {loading ? (
-        <div className="gap-5 flex">
-          <Skeleton variant="rectangular" width={50} height={40} />
-          <Skeleton variant="rectangular" width={50} height={40} />
-        </div>
-      ) : (
-        
-      )} */}
+    <div>
       {path ? (
-        <Link to={"/"} className="bg-slate-100 p-2 rounded-md">
-          back
-        </Link>
+        <div className="navbar p-2">
+          <Link to={"/"} className="bg-slate-100 ml-2 p-2 rounded-md">
+            back
+          </Link>
+        </div>
       ) : token ? (
         loading ? (
           <div className="navbar p-2">

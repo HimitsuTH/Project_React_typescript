@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 
-import { getCurrentUser } from "@/services/user.service";
+// import { getCurrentUser } from "@/services/user.service";
 
 import axios from "axios";
 import { Skeleton } from "@mui/material";
@@ -21,7 +21,7 @@ const Index = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const getData = async () => {
     const response = await axios.get(`${import.meta.env.VITE_URL}/shop`);
-    getCurrentUser();
+    // getCurrentUser();
     setData(response.data);
     setLoading(false);
   };

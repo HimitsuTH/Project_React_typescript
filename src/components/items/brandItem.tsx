@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
+import IUser from "@/types/Auth";
 import { brand } from "@/types/types";
 
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -45,11 +46,13 @@ const brandItem = ({ data }: any | brand) => {
   };
   return (
     <div
-      className={
-        currentUser.role == "admin"
-          ? "p-3 m-2 bg-slate-50 rounded-lg grid place-items-center brandItem"
-          : "p-3 m-2 bg-slate-50 rounded-lg grid place-items-cente "
-      }
+      className={`p-3 m-2 bg-slate-600 rounded-lg grid place-items-center text-white ${
+        currentUser.role == "admin" && "brandItem"
+      }`}
+      //   currentUser.role == "admin"
+      //     ? "p-3 m-2 bg-slate-600 rounded-lg grid place-items-center brandItem"
+      //     : "p-3 m-2 bg-slate-600 rounded-lg grid place-items-cente "
+      // }
     >
       <Link
         to={`/brand/${data.id}`}
@@ -60,7 +63,7 @@ const brandItem = ({ data }: any | brand) => {
       {currentUser?.role == "admin" && (
         <DeleteIcon
           onClick={() => handleDelete(data.id)}
-          className="text-black cursor-pointer"
+          className="cursor-pointer text-slate-200"
           sx={{ "&:hover": { color: "#b9bdff" } }}
         />
       )}
