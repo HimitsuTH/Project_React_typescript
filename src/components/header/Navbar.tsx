@@ -23,7 +23,6 @@ type Props = {
 const navbar = ({ path }: Props) => {
   const [user, setUser] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [toggle, setToggle] = useState<boolean>(false);
 
   const tokenString = localStorage.getItem("token");
   let token: Token | null = tokenString ? JSON.parse(tokenString) : null;
@@ -89,10 +88,7 @@ const navbar = ({ path }: Props) => {
             <div className="flex place-items-center">
               {/* <p className="text-white select-none">{user?.email}</p> */}
               <p className="text-white select-none">{user?.name}</p>
-              <Link
-                to={toggle ? "/user" : "/"}
-                onClick={() => setToggle(!toggle)}
-              >
+              <Link to={"/user"}>
                 <EditIcon
                   className="text-white mx-3 cursor-pointer"
                   sx={{ "&:hover": { color: "#b9bdff" } }}
