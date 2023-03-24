@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 type Props = {};
 
 const AddBrand = ({}: Props) => {
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorName, setErrorName] = useState<string>("");
+  const [errorDsc, setErrorDsc] = useState<string>(""); // Dsc => Dscription
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const submitForm = (e: React.FormEvent) => {
@@ -30,28 +31,60 @@ const AddBrand = ({}: Props) => {
       },
       (err) => {
         const msg = err?.response.data;
-           setLoading(false);
-        setErrorMessage(msg);
+        console.log(msg);
+        switch (msg.status_code) {
+          case 400: {
+            setErrorName(msg.message);
+            setErrorDsc("");
+            break;
+          }
+          case 422: {
+            setErrorName("");
+            msg.validation.map((validate: any) => {
+              if (validate.param === "name") {
+                setErrorName(validate.msg);
+              }
+              if (validate.param === "description") {
+                setErrorDsc(validate.msg);
+              }
+            });
+
+            break;
+          }
+          default: {
+            setErrorName("");
+            setErrorDsc("");
+            break;
+          }
+        }
+        setLoading(false);
       }
     );
   };
-
-  console.log(errorMessage);
+  console.log(errorName + "Name");
+  console.log(errorDsc + "Dsc");
 
   return (
-    <div className="grid h-screen place-items-center">
-      <form className="grid gap-3" onSubmit={submitForm}>
+    <div className="grid h-screen place-items-center ">
+      <form
+        className="grid gap-3 bg-blue-900 p-9 w-80 rounded-lg"
+        onSubmit={submitForm}
+      >
         <TextField
           id="outlined-basic"
           // required
           label="Name"
           variant="outlined"
           name="name"
-          inputProps={{ style: { color: "#eee" } }}
+          inputProps={{
+            style: { color: "#eee" },
+          }}
           InputLabelProps={{
             style: { color: "white" },
           }}
         />
+        <p className="text-red-600 text-center">{errorName && errorName}</p>
+        {/* {errorName && <p className="text-red-800 text-center">{errorName}</p>} */}
         <TextField
           id="filled-basic"
           label="Description"
@@ -62,6 +95,10 @@ const AddBrand = ({}: Props) => {
             style: { color: "white" },
           }}
         />
+        <p className="text-red-600 text-center">{errorDsc && errorDsc}</p>
+        {/* {errorDsc && (
+          <p className="text-red-800 text-center">{errorDsc && errorDsc}</p>
+        )} */}
         <button
           type="submit"
           className={`bg-slate-400 hover:bg-white transition-all ${
