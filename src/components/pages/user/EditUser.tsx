@@ -33,9 +33,10 @@ function EditUser() {
                         window.location.reload();
                       },
                       (err) => {
-                        console.log(err);
                         alert(err?.response.data.message);
                         onClose();
+                        setUserName("");
+                        setPassword("");
                       }
                     )
                     .then(() => {
@@ -63,6 +64,7 @@ function EditUser() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
             setUserName(e.target.value)
           }
+          value={userName}
         />
         <input
           type="password"
@@ -71,6 +73,7 @@ function EditUser() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
             setPassword(e.target.value)
           }
+          value={password}
         />
 
         <button>Update</button>
