@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TextField } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { headphone } from "@/types/types";
 
 import { add_headphone } from "@/services/brand.service";
@@ -194,6 +194,9 @@ function addHeadphone({}: Props) {
           {loading ? "loading..." : "Add"}
         </button>
       </form>
+      <Link to={`/brand/${id}`} className="bg-slate-100 p-2 rounded-md mt-5">
+        Back
+      </Link>
     </div>
   );
 }
