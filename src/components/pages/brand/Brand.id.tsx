@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
+import IUser from "@/types/Auth";
+
 import AddIcon from "@mui/icons-material/Add";
 
 type Props = {};
@@ -21,6 +23,10 @@ const Brand_id = (props: Props) => {
   const { id } = useParams();
   const [data, setData] = useState<brand | any>();
   const [loading, setLoading] = useState<boolean>(true);
+
+  //current user
+  const user = localStorage.getItem("user");
+  const currentUser: IUser = user ? JSON.parse(user) : {};
   const navigate = useNavigate();
 
   const getBrand = async () => {
@@ -39,20 +45,22 @@ const Brand_id = (props: Props) => {
         <div>loading...</div>
       ) : (
         <div className="grid h-screen place-items-center">
-          <AddIcon
-            className="text-white mx-3 cursor-pointer absolute top-50 right-24 rounded-full bg-slate-800"
-            sx={{
-              fontSize: 36,
-              "&:hover": { color: "#b9bdff", background: "#0b006d75" },
-            }}
-            onClick={() =>
-              navigate("/headphone/add", {
-                state: {
-                  id: id,
-                },
-              })
-            }
-          />
+          {currentUser.role === "admin" && (
+            <AddIcon
+              className="text-white mx-3 cursor-pointer absolute top-50 right-24 rounded-full bg-slate-800"
+              sx={{
+                fontSize: 36,
+                "&:hover": { color: "#b9bdff", background: "#0b006d75" },
+              }}
+              onClick={() =>
+                navigate("/headphone/add", {
+                  state: {
+                    id: id,
+                  },
+                })
+              }
+            />
+          )}
           <div>
             <p className="uppercase bg-slate-50 p-3 rounded-lg select-none text-center font-bold">
               {data.brand.name}
