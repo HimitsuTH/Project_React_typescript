@@ -32,34 +32,25 @@ export default function Login() {
       },
       (err) => {
         const msg = err?.response.data;
+        console.log(msg)
+        setErrorEmail("");
+        setErrorPassword("");
         switch (msg.status_code) {
           case 401: {
             setErrorPassword(msg.message);
-            setErrorEmail("");
             break;
           }
           case 404: {
             setErrorEmail(msg.message);
-            setErrorPassword("");
             break;
           }
           case 422: {
             msg.validation.map((validate: any) => {
-              if (msg.validation.length > 1) {
-                if (validate.param === "email") {
-                  setErrorEmail(validate.msg);
-                }
-                if (validate.param === "password") {
-                  setErrorPassword(validate.msg);
-                }
-              } else {
-                if (validate.param === "email") {
-                  setErrorEmail(validate.msg);
-                  setErrorPassword("");
-                } else if (validate.param === "password") {
-                  setErrorPassword(validate.msg);
-                  setErrorEmail("");
-                }
+              if (validate.param === "email") {
+                setErrorEmail(validate.msg);
+              }
+              if (validate.param === "password") {
+                setErrorPassword(validate.msg);
               }
             });
 
@@ -90,7 +81,7 @@ export default function Login() {
             type="text"
             className="input"
             placeholder="email"
-            required
+            // required
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
