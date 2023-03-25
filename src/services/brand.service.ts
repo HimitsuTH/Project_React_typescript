@@ -1,5 +1,6 @@
 import axios from "axios";
 import authHeader from "./header.service";
+import { headphone } from "@/types/types";
 
 export const get_Brand = async () => {
   return await axios
@@ -34,5 +35,25 @@ export const delete_Brand = async (id: string) => {
     })
     .then((response) => {
       return response.data;
+    });
+};
+
+export const add_headphone = async (headphone: headphone) => {
+  return await axios
+    .post(
+      `${import.meta.env.VITE_URL}/headphone`,
+      {
+        brand: headphone.brand,
+        name:headphone.name,
+        description: headphone.description,
+        category: headphone.category,
+        price: headphone.price
+      },
+      {
+        headers: authHeader(),
+      }
+    )
+    .then((response) => {
+      return response;
     });
 };

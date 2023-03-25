@@ -22,6 +22,7 @@ const AddBrand = ({}: Props) => {
     const description = target.description.value; // typechecks!
 
     console.log("name :" + name + "des : " + description);
+   
 
     addBrand(name, description).then(
       (res) => {

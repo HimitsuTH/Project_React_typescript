@@ -1,14 +1,23 @@
 import "./App.css";
 
-import Login from "@/components/pages/Login";
 import Index from "@/components/pages/Index";
 import Navbar from "@/components/header/Navbar";
-import Brand_id from "@/components/pages/brand/Brand.id";
+
+//user && auth
+import Login from "@/components/pages/Login";
 import EditUser from "./components/pages/user/EditUser";
+
+
+//Brand
 import Brand from "./components/pages/brand/Brand";
+import Brand_id from "@/components/pages/brand/Brand.id";
 import AddBrand from "./components/pages/brand/AddBrand";
 
-import { getCurrentUser } from "./services/user.service";
+//Headphone
+import AddHeadphone from "./components/pages/headphone/addHeadphone";
+
+
+import { getCurrentUser } from "@/services/user.service";
 
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -44,6 +53,7 @@ function App() {
           <Route path="/user" element={<EditUser />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/brand/add" element={<AddBrand />} />
+          <Route path="/headphone/add" element={<AddHeadphone />} />
         </Routes>
       </div>
     </div>

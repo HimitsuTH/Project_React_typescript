@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -21,6 +21,7 @@ const Brand_id = (props: Props) => {
   const { id } = useParams();
   const [data, setData] = useState<brand | any>();
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const getBrand = async () => {
     const res = await axios.get(`${import.meta.env.VITE_URL}/shop/brand/${id}`);
@@ -44,6 +45,13 @@ const Brand_id = (props: Props) => {
               fontSize: 36,
               "&:hover": { color: "#b9bdff", background: "#0b006d75" },
             }}
+            onClick={() =>
+              navigate("/headphone/add", {
+                state: {
+                  id: id,
+                },
+              })
+            }
           />
           <div>
             <p className="uppercase bg-slate-50 p-3 rounded-lg select-none text-center font-bold">
