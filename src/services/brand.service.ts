@@ -47,7 +47,8 @@ export const add_headphone = async (headphone: headphone) => {
         name:headphone.name,
         description: headphone.description,
         category: headphone.category,
-        price: headphone.price
+        price: headphone.price,
+        stock: headphone.stock
       },
       {
         headers: authHeader(),
