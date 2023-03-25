@@ -66,12 +66,14 @@ const Brand_id = (props: Props) => {
               {data.brand.name}
             </p>
             <div className="flex mt-5 flex-col">
-              {data.headphones.map((headphone: any) => (
+              {data.headphones.map((headphone: any , index:number) => (
                 <li
-                  className="m-2 text-center  rounded-lg text-white cursor-pointer"
+                  className="m-2  rounded-lg text-white cursor-pointer flex gap-2"
                   key={headphone.id}
                 >
-                  {headphone.name}
+                  <p>{index + 1}. </p>
+                  <p>{headphone.name}</p>
+                  <p>{headphone.price} bath.</p>
                 </li>
               ))}
             </div>

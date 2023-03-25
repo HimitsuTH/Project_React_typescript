@@ -7,7 +7,6 @@ import Navbar from "@/components/header/Navbar";
 import Login from "@/components/pages/Login";
 import EditUser from "./components/pages/user/EditUser";
 
-
 //Brand
 import Brand from "./components/pages/brand/Brand";
 import Brand_id from "@/components/pages/brand/Brand.id";
@@ -16,8 +15,8 @@ import AddBrand from "./components/pages/brand/AddBrand";
 //Headphone
 import AddHeadphone from "./components/pages/headphone/addHeadphone";
 
-
 import { getCurrentUser } from "@/services/user.service";
+import { tokenStr } from "./services/header.service";
 
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -38,9 +37,9 @@ function App() {
     usePathname();
   }, [location.pathname]);
 
-  useCallback(()=> {
+  useCallback(() => {
     getCurrentUser();
-  },[])
+  }, [tokenStr]);
   return (
     <div className="relative">
       <Navbar path={path} />
