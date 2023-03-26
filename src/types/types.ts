@@ -6,6 +6,7 @@ export interface brand {
 
 export interface headphone {
   brand?: any | string | null;
+  id?: any | string | null;
   name?: string;
   description?: string;
   price?: number;

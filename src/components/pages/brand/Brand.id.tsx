@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
+import HeadphoneItem from "../../items/headphoneItem";
+
 import IUser from "@/types/Auth";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -66,15 +68,8 @@ const Brand_id = (props: Props) => {
               {data.brand.name}
             </p>
             <div className="flex mt-5 flex-col">
-              {data.headphones.map((headphone: any , index:number) => (
-                <li
-                  className="m-2  rounded-lg text-white cursor-pointer flex gap-2"
-                  key={headphone.id}
-                >
-                  <p>{index + 1}. </p>
-                  <p>{headphone.name}</p>
-                  <p>{headphone.price} bath.</p>
-                </li>
+              {data.headphones.map((headphone: any, index: number) => (
+                <HeadphoneItem data={headphone} i={index} key={headphone.id}/>
               ))}
             </div>
           </div>

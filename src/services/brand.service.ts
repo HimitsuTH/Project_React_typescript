@@ -44,16 +44,26 @@ export const add_headphone = async (headphone: headphone) => {
       `${import.meta.env.VITE_URL}/headphone`,
       {
         brand: headphone.brand,
-        name:headphone.name,
+        name: headphone.name,
         description: headphone.description,
         category: headphone.category,
         price: headphone.price,
-        stock: headphone.stock
+        stock: headphone.stock,
       },
       {
         headers: authHeader(),
       }
     )
+    .then((response) => {
+      return response;
+    });
+};
+
+export const delete_Headphone = async (id: string) => {
+  return await axios
+    .delete(`${import.meta.env.VITE_URL}/headphone/${id}`, {
+      headers: authHeader(),
+    })
     .then((response) => {
       return response;
     });
