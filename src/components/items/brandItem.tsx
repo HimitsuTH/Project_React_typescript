@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { delete_Brand } from "@/services/brand.service";
 
-const brandItem = ({ data }: any | brand) => {
+const brandItem = ({ data }: brand) => {
   const user = localStorage.getItem("user");
   const currentUser: IUser = user ? JSON.parse(user) : {};
   const handleDelete = (id: string) => {

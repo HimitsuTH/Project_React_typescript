@@ -14,6 +14,7 @@ import AddBrand from "./components/pages/brand/AddBrand";
 
 //Headphone
 import AddHeadphone from "./components/pages/headphone/addHeadphone";
+import UpdateHeadphone from "./components/pages/headphone/updateHeadphone";
 
 import { getCurrentUser } from "@/services/user.service";
 import { tokenStr } from "./services/header.service";
@@ -53,6 +54,7 @@ function App() {
           <Route path="/brand" element={<Brand />} />
           <Route path="/brand/add" element={<AddBrand />} />
           <Route path="/headphone/add" element={<AddHeadphone />} />
+          <Route path="/headphone/update" element={<UpdateHeadphone />} />
         </Routes>
       </div>
     </div>

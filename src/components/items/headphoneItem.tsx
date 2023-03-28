@@ -7,6 +7,8 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { delete_Headphone } from "@/services/brand.service";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import EditIcon from "@mui/icons-material/Edit";
+
 import IUser from "@/types/Auth";
 import { headphone } from "@/types/types";
 
@@ -39,7 +41,7 @@ function headphoneItem({ data, i }: Props) {
                         alert(err.response.data.message);
                       }
                     )
-                    .then(() => window.location.reload());;
+                    .then(() => window.location.reload());
                 }}
               >
                 Yes, Delete it!
@@ -53,7 +55,7 @@ function headphoneItem({ data, i }: Props) {
 
   return (
     <div
-      className="m-2 bg-slate-50 cursor-pointer flex gap-2 p-3 rounded-lg"
+      className="m-2 bg-slate-50 cursor-pointer flex gap-2 p-3 rounded-lg "
       key={data.id}
     >
       <div className="flex gap-2 flex-1">
@@ -62,11 +64,19 @@ function headphoneItem({ data, i }: Props) {
         <p>{data.price} bath.</p>
       </div>
       {currentUser?.role == "admin" && (
-        <DeleteIcon
-          onClick={() => handleDelete(data.id)}
-          className="cursor-pointer text-slate-500 "
-          sx={{ "&:hover": { color: "#b9bdff" } }}
-        />
+        <>
+          <Link to={"/headphone/update"} className="flex">
+            <EditIcon
+              className="cursor-pointer text-slate-500 "
+              sx={{ "&:hover": { color: "#b9bdff" } }}
+            />
+          </Link>
+          <DeleteIcon
+            onClick={() => handleDelete(data.id)}
+            className="cursor-pointer text-slate-500 "
+            sx={{ "&:hover": { color: "#b9bdff" } }}
+          />
+        </>
       )}
     </div>
   );

@@ -55,8 +55,13 @@ function addHeadphone({}: Props) {
         navigate(`/brand/${id}`);
       },
       (err) => {
+        setErrorName("");
+        setErrorPrice("");
+        setErrorStock("");
+        setErrorDsc("");
+        setErrorCategory("");
         const msg = err?.response.data;
-        console.log(msg);
+
         switch (msg.status_code) {
           case 400: {
             setErrorName(msg.message);
@@ -64,11 +69,6 @@ function addHeadphone({}: Props) {
             break;
           }
           case 422: {
-            setErrorName("");
-            setErrorPrice("");
-            setErrorStock("");
-            setErrorDsc("");
-            setErrorCategory("");
             msg.validation.map((validate: any) => {
               if (validate.param === "name") {
                 setErrorName(validate.msg);
@@ -103,91 +103,106 @@ function addHeadphone({}: Props) {
     );
   };
   return (
-    <div className="grid  h-screen place-items-center">
+    <div className="grid  h-screen place-items-center bg-white">
       <form
-        className="grid gap-3 bg-blue-900 p-9 w-96 rounded-lg "
+        className="grid gap-5 p-12 rounded-lg form-grid bg-white bg-opacity-5 max-md:grid-cols-1  "
         onSubmit={submitForm}
       >
-        <h1 className="text-center font-bold bg-white select-none rounded-md text-lg">
-          Headphone
-        </h1>
-        <TextField
-          id="outlined-basic"
-          // required
-          label="Name"
-          variant="outlined"
-          name="name"
-          inputProps={{
-            style: { color: "#eee" },
-          }}
-          InputLabelProps={{
-            style: { color: "white" },
-          }}
-        />
-        <p className="text-red-600 text-center">{errorName && errorName}</p>
-        <TextField
-          id="filled-basic"
-          label="Description"
-          variant="outlined"
-          name="description"
-          inputProps={{ style: { color: "#eee" } }}
-          InputLabelProps={{
-            style: { color: "white" },
-          }}
-        />
-        <p className="text-red-600 text-center">{errorDsc && errorDsc}</p>
-        <TextField
-          id="filled-basic"
-          type="number"
-          label="Price"
-          variant="outlined"
-          name="price"
-          InputProps={{
-            inputProps: {
-              max: 999,
-              min: 0,
-            },
-            style: { color: "white" },
-          }}
-          InputLabelProps={{
-            style: { color: "white" },
-          }}
-        />
-        <p className="text-red-600 text-center">{errorPrice && errorPrice}</p>
-        <TextField
-          id="filled-basic"
-          label="Category"
-          variant="outlined"
-          name="category"
-          inputProps={{ style: { color: "#eee" } }}
-          InputLabelProps={{
-            style: { color: "white" },
-          }}
-        />
-        <p className="text-red-600 text-center">
-          {errorCategory && errorCategory}
-        </p>
-        <TextField
-          id="filled-basic"
-          type="number"
-          label="Stock"
-          variant="outlined"
-          name="stock"
-          InputProps={{
-            inputProps: {
-              max: 999,
-              min: 0,
-            },
-            style: { color: "white" },
-          }}
-          InputLabelProps={{
-            style: { color: "white" },
-          }}
-        />
-        <p className="text-red-600 text-center">{errorStock && errorStock}</p>
+        <div>
+          <TextField
+            id="outlined-basic"
+            // required
+            label="Name"
+            variant="outlined"
+            name="name"
+            inputProps={{
+              style: { color: "#333", width: "100%" },
+            }}
+            InputLabelProps={{
+              style: { color: "#333" },
+            }}
+          />
+          <p className="text-red-600 text-sm text-center ">
+            {errorName && errorName}
+          </p>
+        </div>
+        <div>
+          <TextField
+            id="filled-basic"
+            label="Description"
+            variant="outlined"
+            name="description"
+            inputProps={{
+              style: { color: "#333", width: "100%" },
+            }}
+            InputLabelProps={{
+              style: { color: "#333" },
+            }}
+          />
+          <p className="text-red-600 text-sm text-center">
+            {errorDsc && errorDsc}
+          </p>
+        </div>
+        <div className="grid">
+          <TextField
+            id="filled-basic"
+            type="number"
+            label="Price"
+            variant="outlined"
+            name="price"
+            InputProps={{
+              inputProps: {
+                max: 999,
+                min: 0,
+              },
+              style: { color: "#333", width: "100%" },
+            }}
+            InputLabelProps={{
+              style: { color: "#333" },
+            }}
+          />
+          <p className="text-red-600 text-sm text-center">
+            {errorPrice && errorPrice}
+          </p>
+        </div>
+        <div>
+          <TextField
+            id="filled-basic"
+            label="Category"
+            variant="outlined"
+            name="category"
+            inputProps={{ style: { color: "#333" } }}
+            InputLabelProps={{
+              style: { color: "#333" },
+            }}
+          />
+          <p className="text-red-600 text-sm text-center">
+            {errorCategory && errorCategory}
+          </p>
+        </div>
+        <div className=" max-md:col-auto grid ">
+          <TextField
+            id="filled-basic"
+            type="number"
+            label="Stock"
+            variant="outlined"
+            name="stock"
+            InputProps={{
+              inputProps: {
+                max: 999,
+                min: 0,
+              },
+              style: { color: "#333" },
+            }}
+            InputLabelProps={{
+              style: { color: "#333" },
+            }}
+          />
+          <p className="text-red-600 text-sm ">{errorStock && errorStock}</p>
+        </div>
         <button
           type="submit"
-          className={`bg-slate-400 hover:bg-white transition-all ${
+          className={`bg-slate-400 justify-self-center w-52 col-span-2 max-md:col-auto hover:bg-white transition-all ${
             loading && "opacity-50 cursor-not-allowed"
           }`}
         >
