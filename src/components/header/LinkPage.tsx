@@ -6,10 +6,10 @@ type Props = {}
 function LinkPage({}: Props) {
   return (
     <ul className="gap-5 flex">
-      <Link replace to={"/"} className="bg-slate-100 p-2 rounded-md">
+      <Link replace to={"/"} className=" bg-slate-800 p-2 rounded-md text-white">
         Home
       </Link>
-      <Link replace to={"/brand"} className="bg-slate-100 p-2 rounded-md">
+      <Link replace to={"/brand"} className="bg-slate-800 p-2 rounded-md text-white">
         Brand
       </Link>
     </ul>

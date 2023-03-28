@@ -67,7 +67,7 @@ const AddBrand = ({}: Props) => {
   return (
     <div className="grid h-screen place-items-center ">
       <form
-        className="grid gap-3 bg-blue-900 p-9 w-80 rounded-lg"
+        className="grid gap-3  p-9 w-80 rounded-lg"
         onSubmit={submitForm}
       >
         <TextField
@@ -77,10 +77,10 @@ const AddBrand = ({}: Props) => {
           variant="outlined"
           name="name"
           inputProps={{
-            style: { color: "#eee" },
+            style: { color: "#333" },
           }}
           InputLabelProps={{
-            style: { color: "white" },
+            style: { color: "#333" },
           }}
         />
         <p className="text-red-600 text-center">{errorName && errorName}</p>
@@ -90,9 +90,9 @@ const AddBrand = ({}: Props) => {
           label="Description"
           variant="outlined"
           name="description"
-          inputProps={{ style: { color: "#eee" } }}
+          inputProps={{ style: { color: "#333" } }}
           InputLabelProps={{
-            style: { color: "white" },
+            style: { color: "#333" },
           }}
         />
         <p className="text-red-600 text-center">{errorDsc && errorDsc}</p>

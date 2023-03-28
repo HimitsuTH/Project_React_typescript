@@ -16,15 +16,15 @@ function updateHeadphone({}: Props) {
   const [errorStock, setErrorStock] = useState<string>("");
 
   const location = useLocation();
-//   console.log(location)
-//   const id = location.state.id;
+  //   console.log(location)
+  //   const id = location.state.id;
   const navigate = useNavigate();
 
   return (
-    <div className="grid  h-screen place-items-center ">
+    <div className="grid  h-screen place-items-center bg-white">
       <form
-        className="grid gap-8 p-12 rounded-lg form-grid  max-md:grid-cols-1 "
-        // onSubmit={}
+        className="grid gap-5 p-12 rounded-lg form-grid bg-white bg-opacity-5 max-md:grid-cols-1  "
+        // onSubmit={submitForm}
       >
         <div>
           <TextField
@@ -34,13 +34,15 @@ function updateHeadphone({}: Props) {
             variant="outlined"
             name="name"
             inputProps={{
-              style: { color: "#eee", width: "100%" },
+              style: { color: "#333", width: "100%" },
             }}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "#333" },
             }}
           />
-          <p className="text-red-600 text-sm">{errorName && errorName}</p>
+          <p className="text-red-600 text-sm text-center ">
+            {errorName && errorName}
+          </p>
         </div>
         <div>
           <TextField
@@ -49,13 +51,15 @@ function updateHeadphone({}: Props) {
             variant="outlined"
             name="description"
             inputProps={{
-              style: { color: "#eee", width: "100%" },
+              style: { color: "#333", width: "100%" },
             }}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "#333" },
             }}
           />
-          <p className="text-red-600 text-sm">{errorDsc && errorDsc}</p>
+          <p className="text-red-600 text-sm text-center">
+            {errorDsc && errorDsc}
+          </p>
         </div>
         <div className="grid">
           <TextField
@@ -69,13 +73,15 @@ function updateHeadphone({}: Props) {
                 max: 999,
                 min: 0,
               },
-              style: { color: "#eee", width: "100%" },
+              style: { color: "#333", width: "100%" },
             }}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "#333" },
             }}
           />
-          <p className="text-red-600 text-sm">{errorPrice && errorPrice}</p>
+          <p className="text-red-600 text-sm text-center">
+            {errorPrice && errorPrice}
+          </p>
         </div>
         <div>
           <TextField
@@ -83,12 +89,12 @@ function updateHeadphone({}: Props) {
             label="Category"
             variant="outlined"
             name="category"
-            inputProps={{ style: { color: "#eee" } }}
+            inputProps={{ style: { color: "#333" } }}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "#333" },
             }}
           />
-          <p className="text-red-600 text-sm">
+          <p className="text-red-600 text-sm text-center">
             {errorCategory && errorCategory}
           </p>
         </div>
@@ -104,13 +110,15 @@ function updateHeadphone({}: Props) {
                 max: 999,
                 min: 0,
               },
-              style: { color: "white" },
+              style: { color: "#333" },
             }}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "#333" },
             }}
           />
-          <p className="text-red-600 text-sm">{errorStock && errorStock}</p>
+          <p className="text-red-600 text-sm text-center">
+            {errorStock && errorStock}
+          </p>
         </div>
         <button
           type="submit"
@@ -123,8 +131,6 @@ function updateHeadphone({}: Props) {
       </form>
       <button onClick={() => navigate(-1)}>Go back</button>
     </div>
-      
-   
   );
 }
 

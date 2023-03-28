@@ -198,7 +198,9 @@ function addHeadphone({}: Props) {
               style: { color: "#333" },
             }}
           />
-          <p className="text-red-600 text-sm ">{errorStock && errorStock}</p>
+          <p className="text-red-600 text-sm text-center">
+            {errorStock && errorStock}
+          </p>
         </div>
         <button
           type="submit"

@@ -61,14 +61,14 @@ const navbar = ({ path }: Props) => {
   return (
     <div >
       {path ? (
-        <div className="navbar p-2">
-          <Link to={"/"} className="bg-slate-100 ml-2 p-2 rounded-md">
+        <div className="navbar p-5 justify-end">
+          <Link to={"/"} className="text-white ml-2 p-2 rounded-md bg-slate-800">
             back
           </Link>
         </div>
       ) : token ? (
         loading ? (
-          <div className="navbar p-2">
+          <div className="navbar p-5">
             <div className="flex justify-around gap-2">
               <Skeleton variant="rectangular" width={70} height={50} />
               <Skeleton variant="rectangular" width={70} height={50} />
@@ -80,16 +80,16 @@ const navbar = ({ path }: Props) => {
             <LinkPage />
             <div className="flex place-items-center">
               {/* <p className="text-white select-none">{user?.email}</p> */}
-              <p className="text-white select-none">{user?.name}</p>
+              <p className=" text-gray-800 select-none">{user?.name}</p>
               <Link to={"/user"}>
                 <EditIcon
-                  className="text-white mx-3 cursor-pointer"
+                  className="text-gray-800 mx-3 cursor-pointer"
                   sx={{ "&:hover": { color: "#b9bdff" } }}
                 />
               </Link>
               <Link
                 to={"/login"}
-                className="bg-slate-100 p-2 rounded-md"
+                className="bg-slate-800 p-2 rounded-md text-white" 
                 onClick={handleToken}
               >
                 Logout
@@ -100,7 +100,7 @@ const navbar = ({ path }: Props) => {
       ) : (
         <div className="navbar p-5">
           <LinkPage />
-          <Link to={"/login"} className="bg-slate-100 p-2 rounded-md">
+          <Link to={"/login"} className="bg-slate-800 p-2 rounded-md text-white">
             sign in
           </Link>
         </div>
