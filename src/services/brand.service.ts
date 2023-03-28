@@ -38,6 +38,37 @@ export const delete_Brand = async (id: string) => {
     });
 };
 
+export const id_headphone = async (id: any) => {
+  return await axios
+    .get(`${import.meta.env.VITE_URL}/headphone/${id}`, {
+      headers: authHeader(),
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const update_headphone = async (headphone:headphone) => {
+  return await axios
+  .put(
+    `${import.meta.env.VITE_URL}/headphone/${headphone.id}`,
+    {
+      name: headphone.name,
+      description: headphone.description,
+      category: headphone.category,
+      price: headphone.price,
+      stock: headphone.stock,
+    },
+    {
+      headers: authHeader(),
+    }
+  )
+  .then((response) => {
+    console.log(response)
+    return response.data;
+  });
+}
+
 export const add_headphone = async (headphone: headphone) => {
   return await axios
     .post(

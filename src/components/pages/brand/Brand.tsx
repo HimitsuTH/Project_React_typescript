@@ -89,7 +89,7 @@ const Brand = (props: Props) => {
         </div>
       ) : (
         <div className="grid grid-cols-2">
-          {data.map((data: brand) => (
+          {data.map((data: brand ) => (
             <BrandItem key={data.id} data={data} />
           ))}
         </div>

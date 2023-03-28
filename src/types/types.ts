@@ -1,9 +1,7 @@
 export interface brand {
-  data: {
-    id?: any | null;
-    name?: string;
-    description?: string;
-  };
+  id?: any | null;
+  name?: string;
+  description?: string;
 }
 
 export interface headphone {

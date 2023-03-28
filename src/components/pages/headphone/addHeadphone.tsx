@@ -152,7 +152,6 @@ function addHeadphone({}: Props) {
             name="price"
             InputProps={{
               inputProps: {
-                max: 999,
                 min: 0,
               },
               style: { color: "#333", width: "100%" },
@@ -189,7 +188,6 @@ function addHeadphone({}: Props) {
             name="stock"
             InputProps={{
               inputProps: {
-                max: 999,
                 min: 0,
               },
               style: { color: "#333" },

@@ -65,7 +65,7 @@ function headphoneItem({ data, i }: Props) {
       </div>
       {currentUser?.role == "admin" && (
         <>
-          <Link to={"/headphone/update"} className="flex">
+          <Link to={`/headphone/${data.id}/update`} className="flex">
             <EditIcon
               className="cursor-pointer text-slate-500 "
               sx={{ "&:hover": { color: "#b9bdff" } }}

@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { id_headphone, update_headphone } from "@/services/brand.service";
 import { TextField } from "@mui/material";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link, useParams } from "react-router-dom";
 
 type Props = {};
 
 function updateHeadphone({}: Props) {
   const [loading, setLoading] = useState<boolean>(false);
+  const { id } = useParams();
+
+  const [name, setName] = useState<string>("");
+  const [headphoneID, setHeadphoneID] = useState<string>("");
+  const [brand_id, setBrand_id] = useState<string>("");
+  const [dsc, setDsc] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [stock, setStock] = useState<number>(0);
 
   //Error
   const [errorName, setErrorName] = useState<string>("");
@@ -15,16 +25,47 @@ function updateHeadphone({}: Props) {
   const [errorCategory, setErrorCategory] = useState<string>("");
   const [errorStock, setErrorStock] = useState<string>("");
 
-  const location = useLocation();
-  //   console.log(location)
-  //   const id = location.state.id;
   const navigate = useNavigate();
+
+  const get_headphone = () => {
+    id_headphone(id).then((res) => {
+      const data = res.data[0];
+      // console.log(data);
+      setName(data.name);
+      setHeadphoneID(data.id);
+      setBrand_id(data.brand_id);
+      setDsc(data.description);
+      setCategory(data.category);
+      setPrice(data.price);
+      setStock(data.stock);
+    });
+  };
+
+  const submitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    const headphone = {
+      id: headphoneID,
+      name: name,
+      description: dsc,
+      category: category,
+      price: price,
+      stock: stock,
+    };
+    update_headphone(headphone).then((res) => {
+      alert(res.message)
+      navigate(`/brand/${brand_id}`);
+    });
+  };
+
+  useEffect(() => {
+    get_headphone();
+  }, [id]);
 
   return (
     <div className="grid  h-screen place-items-center bg-white">
       <form
         className="grid gap-5 p-12 rounded-lg form-grid bg-white bg-opacity-5 max-md:grid-cols-1  "
-        // onSubmit={submitForm}
+        onSubmit={submitForm}
       >
         <div>
           <TextField
@@ -33,6 +74,8 @@ function updateHeadphone({}: Props) {
             label="Name"
             variant="outlined"
             name="name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             inputProps={{
               style: { color: "#333", width: "100%" },
             }}
@@ -50,6 +93,8 @@ function updateHeadphone({}: Props) {
             label="Description"
             variant="outlined"
             name="description"
+            onChange={(e) => setDsc(e.target.value)}
+            value={dsc}
             inputProps={{
               style: { color: "#333", width: "100%" },
             }}
@@ -68,9 +113,10 @@ function updateHeadphone({}: Props) {
             label="Price"
             variant="outlined"
             name="price"
+            onChange={(e) => setPrice(parseInt(e.target.value))}
+            value={price}
             InputProps={{
               inputProps: {
-                max: 999,
                 min: 0,
               },
               style: { color: "#333", width: "100%" },
@@ -89,6 +135,8 @@ function updateHeadphone({}: Props) {
             label="Category"
             variant="outlined"
             name="category"
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
             inputProps={{ style: { color: "#333" } }}
             InputLabelProps={{
               style: { color: "#333" },
@@ -105,9 +153,10 @@ function updateHeadphone({}: Props) {
             label="Stock"
             variant="outlined"
             name="stock"
+            onChange={(e) => setStock(parseInt(e.target.value))}
+            value={stock}
             InputProps={{
               inputProps: {
-                max: 999,
                 min: 0,
               },
               style: { color: "#333" },
@@ -129,7 +178,7 @@ function updateHeadphone({}: Props) {
           {loading ? "loading..." : "update"}
         </button>
       </form>
-      <button onClick={() => navigate(-1)}>Go back</button>
+      <button onClick={() => navigate(`/brand/${brand_id}`)}>Go back</button>
     </div>
   );
 }

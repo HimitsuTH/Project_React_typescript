@@ -54,7 +54,7 @@ function App() {
           <Route path="/brand" element={<Brand />} />
           <Route path="/brand/add" element={<AddBrand />} />
           <Route path="/headphone/add" element={<AddHeadphone />} />
-          <Route path="/headphone/update" element={<UpdateHeadphone />} />
+          <Route path="/headphone/:id/update" element={<UpdateHeadphone />} />
         </Routes>
       </div>
     </div>
