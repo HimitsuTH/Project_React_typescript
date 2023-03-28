@@ -59,7 +59,7 @@ const navbar = ({ path }: Props) => {
   };
 
   return (
-    <div>
+    <div >
       {path ? (
         <div className="navbar p-2">
           <Link to={"/"} className="bg-slate-100 ml-2 p-2 rounded-md">
