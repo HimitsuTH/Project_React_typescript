@@ -69,13 +69,15 @@ const Brand_id = (props: Props) => {
             </p>
             <div className="flex mt-5 flex-col">
               {data.headphones.map((headphone: any, index: number) => (
-                <HeadphoneItem data={headphone} i={index} key={headphone.id}/>
+                <HeadphoneItem data={headphone} i={index} key={headphone.id} />
               ))}
             </div>
           </div>
-          <Link to={"/brand"} className="bg-slate-100 p-2 rounded-md mt-5">
-            Back
-          </Link>
+          <button>
+            <Link to={"/brand"} className="bg-slate-100 p-2 rounded-md mt-5">
+              Back
+            </Link>
+          </button>
         </div>
       )}
     </div>

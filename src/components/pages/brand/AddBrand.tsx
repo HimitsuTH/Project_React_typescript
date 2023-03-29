@@ -22,7 +22,6 @@ const AddBrand = ({}: Props) => {
     const description = target.description.value; // typechecks!
 
     console.log("name :" + name + "des : " + description);
-   
 
     addBrand(name, description).then(
       (res) => {
@@ -66,10 +65,7 @@ const AddBrand = ({}: Props) => {
 
   return (
     <div className="grid h-screen place-items-center ">
-      <form
-        className="grid gap-3  p-9 w-80 rounded-lg"
-        onSubmit={submitForm}
-      >
+      <form className="grid gap-3 p-9 w-80 rounded-lg" onSubmit={submitForm}>
         <TextField
           id="outlined-basic"
           // required

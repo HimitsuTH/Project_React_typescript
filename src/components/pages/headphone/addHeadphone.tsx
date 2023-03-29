@@ -209,9 +209,11 @@ function addHeadphone({}: Props) {
           {loading ? "loading..." : "Add"}
         </button>
       </form>
-      <Link to={`/brand/${id}`} className="bg-slate-100 p-2 rounded-md mt-5">
-        Back
-      </Link>
+      <button>
+        <Link to={`/brand/${id}`} className="bg-slate-100 p-2 rounded-md mt-5 ">
+          Back
+        </Link>
+      </button>
     </div>
   );
 }
