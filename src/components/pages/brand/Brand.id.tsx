@@ -73,11 +73,7 @@ const Brand_id = (props: Props) => {
               ))}
             </div>
           </div>
-          <button>
-            <Link to={"/brand"} className="bg-slate-100 p-2 rounded-md mt-5">
-              Back
-            </Link>
-          </button>
+          <button onClick={() => navigate("/brand")}>Back</button>
         </div>
       )}
     </div>
