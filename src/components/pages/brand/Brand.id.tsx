@@ -46,7 +46,7 @@ const Brand_id = (props: Props) => {
       {loading ? (
         <div>loading...</div>
       ) : (
-        <div className="grid h-screen place-items-center">
+        <div className="grid h-screen justify-items-center items-center">
           {currentUser.role === "admin" && (
             <AddIcon
               className="text-white mx-3 cursor-pointer absolute top-50 right-24 rounded-full bg-slate-800"
@@ -63,8 +63,8 @@ const Brand_id = (props: Props) => {
               }
             />
           )}
-          <div>
-            <p className="uppercase bg-slate-50 p-3 rounded-lg select-none text-center font-bold">
+          <div className="grid drop-shadow-md">
+            <p className="uppercase bg-slate-50 p-3 rounded-lg select-none text-center font-bold justify-self-center ">
               {data.brand.name}
             </p>
             <div className="flex mt-5 flex-col">
