@@ -48,26 +48,28 @@ export const id_headphone = async (id: any) => {
     });
 };
 
-export const update_headphone = async (headphone:headphone) => {
+export const update_headphone = async (headphone: headphone) => {
+  const { name, description, category, price, stock } = headphone;
+
   return await axios
-  .put(
-    `${import.meta.env.VITE_URL}/headphone/${headphone.id}`,
-    {
-      name: headphone.name,
-      description: headphone.description,
-      category: headphone.category,
-      price: headphone.price,
-      stock: headphone.stock,
-    },
-    {
-      headers: authHeader(),
-    }
-  )
-  .then((response) => {
-    console.log(response)
-    return response.data;
-  });
-}
+    .put(
+      `${import.meta.env.VITE_URL}/headphone/${headphone.id}`,
+      {
+        ...(name && {name}),
+        ...(description && {description}),
+        ...(category && {category}),
+        ...(price && {price}),
+        ...(stock && {stock})
+      },
+      {
+        headers: authHeader(),
+      }
+    )
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    });
+};
 
 export const add_headphone = async (headphone: headphone) => {
   return await axios

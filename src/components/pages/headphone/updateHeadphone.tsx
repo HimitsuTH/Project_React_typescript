@@ -15,8 +15,8 @@ function updateHeadphone({}: Props) {
   const [brand_id, setBrand_id] = useState<string>("");
   const [dsc, setDsc] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const [price, setPrice] = useState<number>(0);
-  const [stock, setStock] = useState<number>(0);
+  const [price, setPrice] = useState<string>("");
+  const [stock, setStock] = useState<string>("");
 
   //Error
   const [errorName, setErrorName] = useState<string>("");
@@ -52,7 +52,7 @@ function updateHeadphone({}: Props) {
       stock: stock,
     };
     update_headphone(headphone).then((res) => {
-      alert(res.message)
+      alert(res.message);
       navigate(`/brand/${brand_id}`);
     });
   };
@@ -113,7 +113,7 @@ function updateHeadphone({}: Props) {
             label="Price"
             variant="outlined"
             name="price"
-            onChange={(e) => setPrice(parseInt(e.target.value))}
+            onChange={(e) => setPrice(e.target.value)}
             value={price}
             InputProps={{
               inputProps: {
@@ -153,7 +153,7 @@ function updateHeadphone({}: Props) {
             label="Stock"
             variant="outlined"
             name="stock"
-            onChange={(e) => setStock(parseInt(e.target.value))}
+            onChange={(e) => setStock(e.target.value)}
             value={stock}
             InputProps={{
               inputProps: {
