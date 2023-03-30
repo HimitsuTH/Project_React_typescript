@@ -72,6 +72,7 @@ const navbar = ({ path }: Props) => {
             <div className="flex justify-around gap-2">
               <Skeleton variant="rectangular" width={70} height={50} />
               <Skeleton variant="rectangular" width={70} height={50} />
+              <Skeleton variant="rectangular" width={70} height={50} />
             </div>
             <Skeleton variant="rectangular" width={70} height={50} />
           </div>
