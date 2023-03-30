@@ -38,13 +38,23 @@ export const delete_Brand = async (id: string) => {
     });
 };
 
-export const get_headphone = async (page: number | null) => {
+
+//Headphone
+export const get_headphone = async () => {
   return await axios
-    .get(`${import.meta.env.VITE_URL}/headphone/${page}?`)
+    .get(`${import.meta.env.VITE_URL}/headphone/`)
     .then((response) => {
       return response.data;
     });
 };
+
+export const get_Page = async (page:number) => {
+  return await axios
+  .get(`${import.meta.env.VITE_URL}/headphone/page${page}?`)
+  .then((response) => {
+    return response.data;
+  });
+}
 
 export const id_headphone = async (id: any) => {
   return await axios

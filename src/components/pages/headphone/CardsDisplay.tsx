@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { Skeleton, Pagination } from "@mui/material";
-import { get_headphone } from "@/services/brand.service";
+import { get_headphone, get_Page } from "@/services/brand.service";
 import { headphone } from "@/types/types";
 
 type Props = {};
 
 function CardsDisplay({}: Props) {
-  const [currentPage, setCurrentPage] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
   //   console.log(currentPage);
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<headphone[]>([]);
+
+  const [count, setCount] = useState<number>(0);
+
   const getHeadphone = () => {
-    get_headphone(currentPage).then((res) => {
-      setData(res.data);
+    get_Page(currentPage).then((res) => setData(res.data));
+    get_headphone().then((res) => {
+      setCount(Math.ceil(res.data.length / 6));
       setLoading(false);
     });
   };
@@ -21,6 +26,8 @@ function CardsDisplay({}: Props) {
   useEffect(() => {
     getHeadphone();
   }, [currentPage]);
+
+//   console.log(data);
   const handleChange = (e: any, p: number) => {
     setLoading(true);
     if (p == 1) {
@@ -65,6 +72,12 @@ function CardsDisplay({}: Props) {
             width={300}
             className="mb-5 rounded-md"
           />
+          <Skeleton
+            variant="rectangular"
+            height={250}
+            width={300}
+            className="mb-5 rounded-md"
+          />
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-5  m-20  max-lg:grid-cols-1">
@@ -74,7 +87,7 @@ function CardsDisplay({}: Props) {
         </div>
       )}
       <Pagination
-        count={3}
+        count={count}
         variant="outlined"
         shape="rounded"
         onChange={(e, p) => handleChange(e, p)}
