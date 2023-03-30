@@ -38,6 +38,14 @@ export const delete_Brand = async (id: string) => {
     });
 };
 
+export const get_headphone = async (page: number | null) => {
+  return await axios
+    .get(`${import.meta.env.VITE_URL}/headphone/${page}?`)
+    .then((response) => {
+      return response.data;
+    });
+};
+
 export const id_headphone = async (id: any) => {
   return await axios
     .get(`${import.meta.env.VITE_URL}/headphone/${id}`, {
@@ -55,11 +63,11 @@ export const update_headphone = async (headphone: headphone) => {
     .put(
       `${import.meta.env.VITE_URL}/headphone/${headphone.id}`,
       {
-        ...(name && {name}),
-        ...(description && {description}),
-        ...(category && {category}),
-        ...(price && {price}),
-        ...(stock && {stock})
+        ...(name && { name }),
+        ...(description && { description }),
+        ...(category && { category }),
+        ...(price && { price }),
+        ...(stock && { stock }),
       },
       {
         headers: authHeader(),

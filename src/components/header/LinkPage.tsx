@@ -12,6 +12,9 @@ function LinkPage({}: Props) {
       <Link replace to={"/brand"} className="bg-slate-800 p-2 rounded-md text-white">
         Brand
       </Link>
+      <Link replace to={"/headphone"} className="bg-slate-800 p-2 rounded-md text-white">
+        Headphone
+      </Link>
     </ul>
   );
 }

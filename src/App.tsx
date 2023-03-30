@@ -13,6 +13,7 @@ import Brand_id from "@/components/pages/brand/Brand.id";
 import AddBrand from "./components/pages/brand/AddBrand";
 
 //Headphone
+import Headphone from "@/components/pages/headphone";
 import AddHeadphone from "./components/pages/headphone/addHeadphone";
 import UpdateHeadphone from "./components/pages/headphone/updateHeadphone";
 
@@ -53,6 +54,7 @@ function App() {
           <Route path="/user" element={<EditUser />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/brand/add" element={<AddBrand />} />
+          <Route path="/headphone/" element={<Headphone />} />
           <Route path="/headphone/add" element={<AddHeadphone />} />
           <Route path="/headphone/:id/update" element={<UpdateHeadphone />} />
         </Routes>

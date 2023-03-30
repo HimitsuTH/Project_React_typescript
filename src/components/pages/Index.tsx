@@ -19,9 +19,12 @@ interface Shop {
 const Index = () => {
   const [data, setData] = useState<Shop>();
   const [loading, setLoading] = useState<boolean>(true);
+ 
   const getData = async () => {
     const response = await axios.get(`${import.meta.env.VITE_URL}/shop`);
     // getCurrentUser();
+
+  
     setData(response.data);
     setLoading(false);
   };

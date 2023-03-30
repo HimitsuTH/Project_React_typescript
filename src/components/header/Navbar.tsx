@@ -59,7 +59,7 @@ const navbar = ({ path }: Props) => {
   };
 
   return (
-    <div >
+    <div className="">
       {path ? (
         <div className="navbar p-5 justify-end">
           <Link to={"/"} className="text-white ml-2 p-2 rounded-md bg-slate-800">
