@@ -14,10 +14,16 @@ function CardsDisplay({}: Props) {
   const [data, setData] = useState<headphone[]>([]);
 
   const [count, setCount] = useState<number>(0);
+  const itemsPerPage = 6;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedItems = data.slice(startIndex, endIndex);
 
   const getHeadphone = () => {
-    get_Page(currentPage).then((res) => setData(res.data));
+    // get_Page(currentPage).then((res) => setData(res.data));
     get_headphone().then((res) => {
+      setData(res.data);
       setCount(Math.ceil(res.data.length / 6));
       setLoading(false);
     });
@@ -27,14 +33,10 @@ function CardsDisplay({}: Props) {
     getHeadphone();
   }, [currentPage]);
 
-//   console.log(data);
+  //   console.log(data);
   const handleChange = (e: any, p: number) => {
     setLoading(true);
-    if (p == 1) {
-      setCurrentPage(0);
-    } else {
-      setCurrentPage(p - 1);
-    }
+    setCurrentPage(p);
     // window.location.reload();
   };
   //   console.log(data);
@@ -81,7 +83,7 @@ function CardsDisplay({}: Props) {
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-5  m-20  max-lg:grid-cols-1">
-          {data.map((headphone) => (
+          {displayedItems.map((headphone) => (
             <Card key={headphone.id} {...headphone} />
           ))}
         </div>
