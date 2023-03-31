@@ -9,7 +9,7 @@ export interface headphone {
   id?: any | string | null;
   name?: string;
   description?: string;
-  price?: number | string;
+  price: number | string;
   category?: string;
   stock?: number | string;
 }

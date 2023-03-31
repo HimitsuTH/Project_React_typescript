@@ -52,7 +52,7 @@ function Card({ ...headphone }: headphone) {
       <p className=" font-bold text-center">{headphone.name}</p>
       <p>{headphone.description}</p>
       <p className=" text-blue-700 absolute bottom-0 m-2 right-2">
-        THB {headphone.price} Bath.
+        THB {headphone.price.toLocaleString()} Bath.
       </p>
       {currentUser?.role == "admin" && (
         <div className="flex absolute top-0 m-3 right-1">
