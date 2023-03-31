@@ -49,10 +49,12 @@ const Brand_id = (props: Props) => {
         <div className="grid h-screen justify-items-center items-center">
           {currentUser.role === "admin" && (
             <AddIcon
-              className="text-white mx-3 cursor-pointer absolute top-50 right-24 rounded-full bg-slate-800"
+              className=" mx-3 cursor-pointer absolute top-50 right-24 rounded-full "
               sx={{
                 fontSize: 36,
-                "&:hover": { color: "#b9bdff", background: "#0b006d75" },
+                background: "#3e3e3e",
+                color: "#fff",
+                "&:hover": { color: "#7877E6" },
               }}
               onClick={() =>
                 navigate("/headphone/add", {

@@ -39,11 +39,13 @@ const Brand = (props: Props) => {
     <div className="grid h-screen place-items-center">
       {currentUser.role == "admin" && (
         <AddIcon
-          className="text-white mx-3 cursor-pointer absolute top-32 rounded-full bg-slate-800"
-          sx={{
-            fontSize: 36,
-            "&:hover": { color: "#b9bdff", background: "#0b006d75" },
-          }}
+        className=" mx-3 cursor-pointer absolute top-50 right-24 rounded-full "
+        sx={{
+          fontSize: 36,
+          background: "#3e3e3e",
+          color: "#fff",
+          "&:hover": { color: "#7877E6" },
+        }}
           onClick={() => navigate("/brand/add")}
         />
       )}
