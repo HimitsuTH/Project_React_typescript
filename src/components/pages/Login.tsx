@@ -20,6 +20,8 @@ export default function Login() {
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
     login(email, password).then(
       () => {
@@ -32,7 +34,7 @@ export default function Login() {
       },
       (err) => {
         const msg = err?.response.data;
-        console.log(msg)
+
         setErrorEmail("");
         setErrorPassword("");
         switch (msg.status_code) {
