@@ -61,10 +61,10 @@ function App() {
           <Route path="/brand/:id" element={<Brand_id />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/headphone/" element={<Headphone />} />
+          <Route path="/user" element={<EditUser />} />
 
           {currentUser.role == "admin" && (
             <>
-              <Route path="/user" element={<EditUser />} />
               <Route path="/brand/add" element={<AddBrand />} />
               <Route path="/headphone/add" element={<AddHeadphone />} />
               <Route
