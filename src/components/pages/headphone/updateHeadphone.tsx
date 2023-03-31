@@ -53,7 +53,7 @@ function updateHeadphone({}: Props) {
     };
     update_headphone(headphone).then((res) => {
       alert(res.message);
-      navigate(`/brand/${brand_id}`);
+      navigate((-1));
     });
   };
 
@@ -178,7 +178,7 @@ function updateHeadphone({}: Props) {
           {loading ? "loading..." : "update"}
         </button>
       </form>
-      <button onClick={() => navigate(`/brand/${brand_id}`)}>Go back</button>
+      <button onClick={() => navigate((-1))}>Go back</button>
     </div>
   );
 }
