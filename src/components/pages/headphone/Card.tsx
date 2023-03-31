@@ -48,7 +48,7 @@ function Card({ ...headphone }: headphone) {
     });
   };
   return (
-    <div className="p-10 w-80 bg-slate-300 drop-shadow-md rounded-lg relative select-none ">
+    <div className="p-10 w-80 bg-slate-300 drop-shadow-md rounded-lg relative select-none h-64">
       <p className=" font-bold text-center">{headphone.name}</p>
       <p>{headphone.description}</p>
       <p className=" text-blue-700 absolute bottom-0 m-2 right-2">
