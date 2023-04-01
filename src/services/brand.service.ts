@@ -10,6 +10,14 @@ export const get_Brand = async () => {
     });
 };
 
+export const get_Brand_id = async (id: any) => {
+  return await axios
+    .get(`${import.meta.env.VITE_URL}/shop/brand/${id}`)
+    .then((response) => {
+      return response;
+    });
+};
+
 export const addBrand = async (name: string, description: string) => {
   return await axios
     .post(
@@ -38,7 +46,6 @@ export const delete_Brand = async (id: string) => {
     });
 };
 
-
 //Headphone
 export const get_headphone = async () => {
   return await axios
@@ -48,13 +55,13 @@ export const get_headphone = async () => {
     });
 };
 
-export const get_Page = async (page:number) => {
+export const get_Page = async (page: number) => {
   return await axios
-  .get(`${import.meta.env.VITE_URL}/headphone/page${page}?`)
-  .then((response) => {
-    return response.data;
-  });
-}
+    .get(`${import.meta.env.VITE_URL}/headphone/page${page}?`)
+    .then((response) => {
+      return response.data;
+    });
+};
 
 export const id_headphone = async (id: any) => {
   return await axios
@@ -78,7 +85,7 @@ export const update_headphone = async (headphone: headphone) => {
         ...(category && { category }),
         ...(price && { price }),
         ...(stock && { stock }),
-        ...(warranty && {warranty})
+        ...(warranty && { warranty }),
       },
       {
         headers: authHeader(),
@@ -101,7 +108,7 @@ export const add_headphone = async (headphone: headphone) => {
         category: headphone.category,
         price: headphone.price,
         stock: headphone.stock,
-        warranty: headphone.warranty
+        warranty: headphone.warranty,
       },
       {
         headers: authHeader(),
