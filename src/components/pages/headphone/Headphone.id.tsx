@@ -27,12 +27,31 @@ function Headphone_id({}: Props) {
       ) : (
         <>
           {data?.map((headphone) => (
-            <div key={headphone.id} className="text-center select-none">
-              <h1 className=" font-bold text-lg ">{headphone.name}</h1>
-              <p>description : {headphone.description}</p>
-              <p>category : {headphone.category}</p>
-              <p>stock : {headphone.stock}</p>
-              <p>price : {headphone.price}</p>
+            <div
+              key={headphone.id}
+              className=" select-none bg-slate-200 w-96 p-5 rounded-xl"
+            >
+              <h1 className=" font-bold text-lg text-center">{headphone.name}</h1>
+              <p>
+                <span className=" font-bold">description : </span>
+                {headphone.description}
+              </p>
+              <p>
+                <span className=" font-bold">category : </span>
+                {headphone.category}
+              </p>
+              <p>
+                <span className=" font-bold">stock : </span>
+                {headphone.stock}
+              </p>
+              <p>
+                <span className=" font-bold">price : </span>
+                {headphone.price}
+              </p>
+              <p>
+                <span className=" font-bold">warranty : </span>
+                {headphone.warranty}
+              </p>
             </div>
           ))}
           <button onClick={() => navigate(-1)}>Back</button>

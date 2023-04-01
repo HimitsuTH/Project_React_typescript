@@ -19,6 +19,7 @@ function updateHeadphone({}: Props) {
   const [category, setCategory] = useState<string>("");
   const [price, setPrice] = useState<string>("");
   const [stock, setStock] = useState<string>("");
+  const [warranty, setWarrany] = useState<string>("");
 
   //Error
   const [idError, setIdError] = useState<boolean>(false);
@@ -42,6 +43,7 @@ function updateHeadphone({}: Props) {
         setCategory(data.category);
         setPrice(data.price);
         setStock(data.stock);
+        setWarrany(data.warranty)
         setIdError(false);
       },
       (err) => {
@@ -59,13 +61,17 @@ function updateHeadphone({}: Props) {
       category: category,
       price: price,
       stock: stock,
+      warranty: warranty,
     };
-    update_headphone(headphone).then((res) => {
-      alert(res.message);
-      navigate(-1);
-    },err=> {
-      console.log(err)
-    });
+    update_headphone(headphone).then(
+      (res) => {
+        alert(res.message);
+        navigate(-1);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   };
 
   useEffect(() => {
@@ -75,7 +81,7 @@ function updateHeadphone({}: Props) {
   return (
     <div className="grid  h-screen place-items-center bg-white">
       {idError ? (
-        <NotFound/>
+        <NotFound />
       ) : (
         <>
           <form
@@ -160,6 +166,20 @@ function updateHeadphone({}: Props) {
               <p className="text-red-600 text-sm text-center">
                 {errorCategory && errorCategory}
               </p>
+            </div>
+            <div>
+              <TextField
+                id="filled-basic"
+                label="Warranty"
+                variant="outlined"
+                name="warranty"
+                value={warranty}
+                onChange={(e) => setWarrany(e.target.value)}
+                inputProps={{ style: { color: "#333" } }}
+                InputLabelProps={{
+                  style: { color: "#333" },
+                }}
+              />
             </div>
             <div className=" max-md:col-auto grid ">
               <TextField

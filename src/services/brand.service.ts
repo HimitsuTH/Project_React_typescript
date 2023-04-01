@@ -67,7 +67,7 @@ export const id_headphone = async (id: any) => {
 };
 
 export const update_headphone = async (headphone: headphone) => {
-  const { name, description, category, price, stock } = headphone;
+  const { name, description, category, price, stock, warranty } = headphone;
 
   return await axios
     .put(
@@ -78,6 +78,7 @@ export const update_headphone = async (headphone: headphone) => {
         ...(category && { category }),
         ...(price && { price }),
         ...(stock && { stock }),
+        ...(warranty && {warranty})
       },
       {
         headers: authHeader(),
@@ -100,6 +101,7 @@ export const add_headphone = async (headphone: headphone) => {
         category: headphone.category,
         price: headphone.price,
         stock: headphone.stock,
+        warranty: headphone.warranty
       },
       {
         headers: authHeader(),

@@ -12,4 +12,5 @@ export interface headphone {
   price: number | string;
   category?: string;
   stock?: number | string;
+  warranty?: string;
 }

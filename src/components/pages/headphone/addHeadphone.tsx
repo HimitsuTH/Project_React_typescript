@@ -32,12 +32,14 @@ function addHeadphone({}: Props) {
       price: { value: number };
       category: { value: string };
       stock: { value: number };
+      warranty: { value: string };
     };
     const name = target.name.value; // typechecks!
     const description = target.description.value; // typechecks!
     const price = target.price.value; // typechecks!
     const category = target.category.value; // typechecks!
     const stock = target.stock.value; // typechecks!
+    const warranty = target.warranty.value; // typechecks!
 
     const headphone: headphone = {
       name: name,
@@ -46,6 +48,7 @@ function addHeadphone({}: Props) {
       category: category,
       stock: stock,
       brand: id,
+      warranty: warranty
     };
 
     add_headphone(headphone).then(
@@ -178,6 +181,18 @@ function addHeadphone({}: Props) {
           <p className="text-red-600 text-sm text-center">
             {errorCategory && errorCategory}
           </p>
+        </div>
+        <div>
+          <TextField
+            id="filled-basic"
+            label="Warranty"
+            variant="outlined"
+            name="warranty"
+            inputProps={{ style: { color: "#333" } }}
+            InputLabelProps={{
+              style: { color: "#333" },
+            }}
+          />
         </div>
         <div className=" max-md:col-auto grid ">
           <TextField
