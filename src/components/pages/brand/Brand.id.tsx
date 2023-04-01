@@ -53,33 +53,7 @@ const Brand_id = (props: Props) => {
   }, []);
 
   return (
-    <div className="grid h-screen place-items-center">
-      <div className="mx-3 cursor-pointer absolute top-50 right-24 rounded-full grid justify-items-center gap-2">
-        {currentUser.role === "admin" && (
-          <AddIcon
-            className=" mx-3 cursor-pointer rounded-full "
-            sx={{
-              fontSize: 36,
-              background: "#3e3e3e",
-              color: "#fff",
-              "&:hover": { color: "#7877E6" },
-            }}
-            onClick={() =>
-              navigate("/headphone/add", {
-                state: {
-                  id: id,
-                },
-              })
-            }
-          />
-        )}
-        <button
-          onClick={() => navigate("/brand")}
-          className=" mx-3 cursor-pointer  rounded-full"
-        >
-          Back
-        </button>
-      </div>
+    <div className="grid h-screen place-items-center ">
       {error ? (
         <NotFound />
       ) : (
@@ -87,22 +61,50 @@ const Brand_id = (props: Props) => {
           {loading ? (
             <div>loading...</div>
           ) : (
-            <div className="grid h-screen justify-items-center items-start m-20 ">
+            <div className="grid h-screen   items-start pt-20  relative">
               {data && (
-                <div className="grid drop-shadow-md">
-                  <p className="uppercase bg-slate-50 p-3 rounded-lg select-none text-center font-bold justify-self-center items-start">
-                    {data.brand.name}
-                  </p>
-                  <div className="flex mt-5 flex-col">
-                    {data.headphones.map((headphone: any, index: number) => (
-                      <HeadphoneItem
-                        data={headphone}
-                        i={index}
-                        key={headphone.id}
-                      />
-                    ))}
+                <>
+                  <div className="grid drop-shadow-md justify-center">
+                    <p className="uppercase bg-slate-50 p-3 rounded-lg select-none text-center font-bold justify-self-center items-start">
+                      {data.brand.name}
+                    </p>
+                    <div className="flex mt-5 flex-col">
+                      {data.headphones.map((headphone: any, index: number) => (
+                        <HeadphoneItem
+                          data={headphone}
+                          i={index}
+                          key={headphone.id}
+                        />
+                      ))}
+                    </div>
                   </div>
-                </div>
+                  <div className="  rounded-full grid justify-items-center gap-2 ">
+                    {currentUser.role === "admin" && (
+                      <AddIcon
+                        className=" mx-3 cursor-pointer rounded-full "
+                        sx={{
+                          fontSize: 36,
+                          background: "#3e3e3e",
+                          color: "#fff",
+                          "&:hover": { color: "#7877E6" },
+                        }}
+                        onClick={() =>
+                          navigate("/headphone/add", {
+                            state: {
+                              id: id,
+                            },
+                          })
+                        }
+                      />
+                    )}
+                    <button
+                      onClick={() => navigate("/brand")}
+                      className=" mx-3 cursor-pointer  rounded-full"
+                    >
+                      Back
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           )}
