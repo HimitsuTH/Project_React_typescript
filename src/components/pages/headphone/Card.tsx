@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 
 import IUser from "@/types/Auth";
 import { headphone } from "@/types/types";
@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 function Card({ ...headphone }: headphone) {
+  const navigate = useNavigate();
   const user = localStorage.getItem("user");
   const currentUser: IUser = user ? JSON.parse(user) : {};
   const handleDelete = (id: string) => {
@@ -48,10 +49,15 @@ function Card({ ...headphone }: headphone) {
     });
   };
   return (
-    <div className="p-10 w-80 bg-slate-300 drop-shadow-md rounded-lg relative select-none h-64">
-      <p className=" font-bold text-center">{headphone.name}</p>
-      <p>{headphone.description}</p>
-      <p className=" text-blue-700 absolute bottom-0 m-2 right-2">
+    <div className="p-10 w-80 bg-slate-300 drop-shadow-md rounded-lg relative  h-64">
+      <div
+        className=" h-full cursor-pointer"
+        onClick={() => navigate(`/headphone/${headphone.id}`)}
+      >
+        <p className=" font-bold text-center">{headphone.name}</p>
+        <p>{headphone.description}</p>
+      </div>
+      <p className=" text-blue-700 absolute bottom-0 m-2 right-2 select-none">
         THB {headphone.price.toLocaleString()} Bath.
       </p>
       {currentUser?.role == "admin" && (
