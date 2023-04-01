@@ -1,14 +1,19 @@
-import React, { useState } from "react";
-import { TextField } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { TextField, Select, MenuItem } from "@mui/material";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { headphone } from "@/types/types";
+import { headphone, brand } from "@/types/types";
+import { get_Brand } from "@/services/brand.service";
 
 import { add_headphone } from "@/services/brand.service";
 
 type Props = {};
 
 function addHeadphone({}: Props) {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [brands, setBrands] = useState<brand[]>([]);
+  const brand = brands.filter((brand) => brand.name === selectedOption);
 
   //Error
   const [errorName, setErrorName] = useState<string>("");
@@ -19,12 +24,37 @@ function addHeadphone({}: Props) {
 
   //router-dom
   const location = useLocation();
-  const id = location.state.id;
+ 
   const navigate = useNavigate();
 
+  //@get brand for select option
+  const getBrand = () => {
+    get_Brand().then((res) => {
+      setBrands(res);
+      console.log(id);
+      const test = id && res.filter((res: brand) => res.id == id);
+      console.log(test && test[0]);
+      const select = test ? test[0].name : res[0].name;
+      setSelectedOption(select);
+    });
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getBrand();
+  }, []);
+
+  const handleSelectChange = (event: any) => {
+    setSelectedOption(event.target.value as string);
+    // const brand = brands.filter(brand => brand.name === selectedOption)
+    // console.log(brand[0].id)
+  };
+  //Headle submit form
+  let id = location.state?.id;
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setButtonLoading(true);
 
     const target = e.target as typeof e.target & {
       name: { value: string };
@@ -47,15 +77,15 @@ function addHeadphone({}: Props) {
       price: price,
       category: category,
       stock: stock,
-      brand: id,
-      warranty: warranty
+      brand: brand[0].id || id,
+      warranty: warranty,
     };
 
     add_headphone(headphone).then(
       (res) => {
         alert(res.data.message);
-        setLoading(false);
-        navigate(`/brand/${id}`);
+        setButtonLoading(false);
+        navigate(`/headphone`);
       },
       (err) => {
         setErrorName("");
@@ -101,7 +131,7 @@ function addHeadphone({}: Props) {
             break;
           }
         }
-        setLoading(false);
+        setButtonLoading(false);
       }
     );
   };
@@ -215,16 +245,25 @@ function addHeadphone({}: Props) {
             {errorStock && errorStock}
           </p>
         </div>
+        <div>
+          <Select value={selectedOption} onChange={handleSelectChange}>
+            {brands.map((brand) => (
+              <MenuItem key={brand.id} value={brand.name}>
+                {brand.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
         <button
           type="submit"
           className={`bg-slate-400 justify-self-center w-52 col-span-2 max-md:col-auto hover:bg-white transition-all ${
-            loading && "opacity-50 cursor-not-allowed"
+            buttonLoading && "opacity-50 cursor-not-allowed"
           }`}
         >
-          {loading ? "loading..." : "Add"}
+          {buttonLoading ? "loading..." : "Add"}
         </button>
       </form>
-      <button onClick={() => navigate(`/brand/${id}`)}>Back</button>
+      <button onClick={() => navigate("/headphone")}>Back</button>
     </div>
   );
 }

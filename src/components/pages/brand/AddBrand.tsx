@@ -31,7 +31,7 @@ const AddBrand = ({}: Props) => {
       },
       (err) => {
         const msg = err?.response.data;
-        // console.log(msg);
+        console.log(msg);
         switch (msg.status_code) {
           case 400: {
             setErrorName(msg.message);

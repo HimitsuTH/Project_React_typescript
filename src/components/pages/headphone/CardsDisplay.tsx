@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+
+import { useNavigate } from "react-router-dom";
 import { Skeleton, Pagination } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
 import { get_headphone } from "@/services/brand.service";
+
+import IUser from "@/types/Auth";
 import { headphone } from "@/types/types";
 
 type Props = {};
 
 function CardsDisplay({}: Props) {
+  const navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  const currentUser: IUser = user ? JSON.parse(user) : {};
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   //   console.log(currentPage);
@@ -85,6 +94,20 @@ function CardsDisplay({}: Props) {
               .map((headphone) => <Card key={headphone.id} {...headphone} />)}
         </div>
       )}
+
+      {currentUser.role == "admin" && (
+        <AddIcon
+          className=" mx-3 cursor-pointer absolute top-50 right-24 rounded-full "
+          sx={{
+            fontSize: 36,
+            background: "#3e3e3e",
+            color: "#fff",
+            "&:hover": { color: "#7877E6" },
+          }}
+          onClick={() => navigate("/headphone/add")}
+        />
+      )}
+
       <Pagination
         count={count}
         variant="outlined"
