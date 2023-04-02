@@ -39,7 +39,7 @@ const Brand = (props: Props) => {
     <div className="grid h-screen place-items-center">
       {currentUser.role == "admin" && (
         <AddIcon
-          className=" mx-3 cursor-pointer absolute top-50 right-24 rounded-full "
+          className=" mx-3 cursor-pointer absolute top-50 right-0 rounded-full "
           sx={{
             fontSize: 36,
             background: "#3e3e3e",

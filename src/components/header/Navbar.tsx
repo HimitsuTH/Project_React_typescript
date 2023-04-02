@@ -62,7 +62,10 @@ const navbar = ({ path }: Props) => {
     <div className=" z-0">
       {path ? (
         <div className="navbar p-5 justify-end">
-          <Link to={"/"} className="text-white ml-2 p-2 rounded-md bg-slate-800">
+          <Link
+            to={"/"}
+            className="text-white ml-2 p-2 rounded-md bg-slate-800"
+          >
             back
           </Link>
         </div>
@@ -90,7 +93,7 @@ const navbar = ({ path }: Props) => {
               </Link>
               <Link
                 to={"/login"}
-                className="bg-slate-800 p-2 rounded-md text-white" 
+                className="bg-slate-800 p-2 rounded-md text-white"
                 onClick={handleToken}
               >
                 Logout
@@ -101,7 +104,10 @@ const navbar = ({ path }: Props) => {
       ) : (
         <div className="navbar p-5">
           <LinkPage />
-          <Link to={"/login"} className="bg-slate-800 p-2 rounded-md text-white">
+          <Link
+            to={"/login"}
+            className="bg-slate-800 p-2 rounded-md text-white"
+          >
             sign in
           </Link>
         </div>

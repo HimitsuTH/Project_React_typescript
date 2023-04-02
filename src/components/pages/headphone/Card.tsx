@@ -49,7 +49,7 @@ function Card({ ...headphone }: headphone) {
     });
   };
   return (
-    <div className="p-10 w-80 bg-slate-300 drop-shadow-md rounded-lg relative  h-64">
+    <div className="p-8 w-80 bg-slate-300 drop-shadow-md rounded-lg relative h-64 max-xl:w-64">
       <div
         className=" h-full cursor-pointer"
         onClick={() => navigate(`/headphone/${headphone.id}`)}

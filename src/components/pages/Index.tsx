@@ -19,12 +19,11 @@ interface Shop {
 const Index = () => {
   const [data, setData] = useState<Shop>();
   const [loading, setLoading] = useState<boolean>(true);
- 
+
   const getData = async () => {
     const response = await axios.get(`${import.meta.env.VITE_URL}/shop`);
     // getCurrentUser();
 
-  
     setData(response.data);
     setLoading(false);
   };
@@ -38,10 +37,10 @@ const Index = () => {
       {loading ? (
         <Skeleton variant="rectangular" className="w-96" height={300} />
       ) : (
-        <div className="flex flex-col justify-center place-items-center select-none mt-5">
+        <div className="select-none mt-5 bg-slate-700 rounded-md ">
           {data && (
-            <div className="bg-slate-700 p-6 rounded-md container w-96">
-              <h2 className="text-3xl font-bold text-white underline mb-3">
+            <div className=" p-6 container w-96 max-lg:w-74">
+              <h2 className="text-3xl font-bold text-white underline mb-3 max-lg:text-xl">
                 {data.name}
               </h2>
               <p className="text-white mb-1">{data.description}</p>
