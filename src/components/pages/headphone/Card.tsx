@@ -30,14 +30,14 @@ function Card({ ...headphone }: headphone) {
                   delete_Headphone(headphone.id)
                     .then(
                       (res) => {
-                        console.log(res);
+                        // console.log(res);
                         alert(res.data.message);
                       },
                       (err) => {
                         alert(err.response.data.message);
                       }
                     )
-                    .then(() => window.location.reload());
+                    .then(() => navigate(0));
                 }}
               >
                 Yes, Delete it!

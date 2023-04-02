@@ -39,13 +39,13 @@ const Brand = (props: Props) => {
     <div className="grid h-screen place-items-center">
       {currentUser.role == "admin" && (
         <AddIcon
-        className=" mx-3 cursor-pointer absolute top-50 right-24 rounded-full "
-        sx={{
-          fontSize: 36,
-          background: "#3e3e3e",
-          color: "#fff",
-          "&:hover": { color: "#7877E6" },
-        }}
+          className=" mx-3 cursor-pointer absolute top-50 right-24 rounded-full "
+          sx={{
+            fontSize: 36,
+            background: "#3e3e3e",
+            color: "#fff",
+            "&:hover": { color: "#7877E6" },
+          }}
           onClick={() => navigate("/brand/add")}
         />
       )}
@@ -91,7 +91,7 @@ const Brand = (props: Props) => {
         </div>
       ) : (
         <div className="grid grid-cols-2">
-          {data.map((data: brand ) => (
+          {data.map((data: brand) => (
             <BrandItem key={data.id} data={data} />
           ))}
         </div>

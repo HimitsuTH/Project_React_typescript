@@ -30,7 +30,7 @@ export default function Login() {
         setEmail("");
         setPassword("");
         navigate("/", { replace: true });
-        window.location.reload();
+        navigate(0);
       },
       (err) => {
         const msg = err?.response.data;

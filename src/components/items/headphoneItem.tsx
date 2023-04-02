@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -18,6 +18,7 @@ type Props = {
 };
 
 function headphoneItem({ data, i }: Props) {
+  const navigate = useNavigate();
   const user = localStorage.getItem("user");
   const currentUser: IUser = user ? JSON.parse(user) : {};
   const handleDelete = (id: string) => {
@@ -41,7 +42,7 @@ function headphoneItem({ data, i }: Props) {
                         alert(err.response.data.message);
                       }
                     )
-                    .then(() => window.location.reload());
+                    .then(() => navigate(0));
                 }}
               >
                 Yes, Delete it!
