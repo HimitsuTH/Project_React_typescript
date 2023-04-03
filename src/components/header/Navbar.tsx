@@ -59,7 +59,7 @@ const navbar = ({ path }: Props) => {
   };
 
   return (
-    <div className=" z-0">
+    <div className=" sticky top-0 z-20">
       {path ? (
         <div className="navbar p-5 justify-end">
           <Link
