@@ -46,74 +46,78 @@ function CardsDisplay({}: Props) {
   };
   //   console.log(data);
   return (
-    <div className="grid h-screen justify-items-center items-center  ">
-      {loading ? (
-        <div className="grid grid-cols-3 gap-5  m-20  max-lg:grid-cols-1">
-          <Skeleton
-            variant="rectangular"
-            height={250}
-            width={300}
-            className="mb-5 rounded-md"
-          />
-          <Skeleton
-            variant="rectangular"
-            height={250}
-            width={300}
-            className="mb-5 rounded-md"
-          />
-          <Skeleton
-            variant="rectangular"
-            height={250}
-            width={300}
-            className="mb-5 rounded-md"
-          />
-          <Skeleton
-            variant="rectangular"
-            height={250}
-            width={300}
-            className="mb-5 rounded-md"
-          />
-          <Skeleton
-            variant="rectangular"
-            height={250}
-            width={300}
-            className="mb-5 rounded-md"
-          />
-          <Skeleton
-            variant="rectangular"
-            height={250}
-            width={300}
-            className="mb-5 rounded-md"
-          />
-        </div>
-      ) : (
-        <div className="grid grid-cols-3 gap-5  m-20  max-lg:grid-cols-1">
-          {data &&
-            data
-              .slice(startIndex, endIndex)
-              .map((headphone) => <Card key={headphone.id} {...headphone} />)}
-        </div>
-      )}
+    <div className="grid h-screen justify-items-center items-center ">
+      <div className=" w-screen  grid justify-items-center">
+        {loading ? (
+          <div className="grid grid-cols-3 gap-5  m-20  max-lg:grid-cols-1">
+            <Skeleton
+              variant="rectangular"
+              height={250}
+              width={300}
+              className=" rounded-md"
+            />
+            <Skeleton
+              variant="rectangular"
+              height={250}
+              width={300}
+              className=" rounded-md"
+            />
+            <Skeleton
+              variant="rectangular"
+              height={250}
+              width={300}
+              className=" rounded-md"
+            />
+            <Skeleton
+              variant="rectangular"
+              height={250}
+              width={300}
+              className="mb-5 rounded-md"
+            />
+            <Skeleton
+              variant="rectangular"
+              height={250}
+              width={300}
+              className=" rounded-md"
+            />
+            <Skeleton
+              variant="rectangular"
+              height={250}
+              width={300}
+              className="rounded-md"
+            />
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-5  m-20  max-lg:grid-cols-1">
+            {data &&
+              data
+                .slice(startIndex, endIndex)
+                .map((headphone) => <Card key={headphone.id} {...headphone} />)}
+          </div>
+        )}
 
-      {currentUser.role == "admin" && (
-        <AddIcon
-          className=" mx-3 cursor-pointer absolute top-50 right-0 rounded-full "
-          sx={{
-            fontSize: 36,
-            background: "#3e3e3e",
-            color: "#fff",
-            "&:hover": { color: "#7877E6" },
-          }}
-          onClick={() => navigate("/headphone/add")}
+      
+
+        <Pagination
+          // className=" mb-"
+          count={count}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChange}
         />
-      )}
-
-      <Pagination
-        count={count}
-        variant="outlined"
-        shape="rounded"
-        onChange={handleChange}
-      />
+      </div>
+      {currentUser.role == "admin" && (
+          <AddIcon
+            className=" mx-3 cursor-pointer absolute top-50 right-0 rounded-full "
+            sx={{
+              fontSize: 36,
+              background: "#3e3e3e",
+              color: "#fff",
+              "&:hover": { color: "#7877E6" },
+            }}
+            onClick={() => navigate("/headphone/add")}
+          />
+        )}
     </div>
   );
 }
