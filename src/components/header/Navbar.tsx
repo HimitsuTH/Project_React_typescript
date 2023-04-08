@@ -31,8 +31,9 @@ const navbar = ({ path }: Props) => {
   const expires_in: number = parseInt(String(token?.expires_in)) || 0;
   const expiryTime = expires_in * 1000;
 
-  if (expiryTime < now) {
+  if (expiryTime < now || token == null) {
     localStorage.removeItem("token");
+    localStorage.removeItem("user")
   }
 
   const getUser = async () => {

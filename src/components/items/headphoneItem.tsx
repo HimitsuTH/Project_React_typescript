@@ -42,7 +42,7 @@ function headphoneItem({ data, i }: Props) {
                         alert(err.response.data.message);
                       }
                     )
-                    .then(() => navigate(0));
+                    .then(() => window.location.reload());
                 }}
               >
                 Yes, Delete it!

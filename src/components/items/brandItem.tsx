@@ -34,8 +34,8 @@ const brandItem = ({ data }: brand | any) => {
                       (err) => {
                         return alert(err?.response.data.message);
                       }
-                    )
-                    .then(() => navigate(0));
+                    ).then(()=> window.location.reload())
+                   
                 }}
               >
                 Yes, Delete it!
